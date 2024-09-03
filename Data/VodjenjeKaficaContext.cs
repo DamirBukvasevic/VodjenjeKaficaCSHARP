@@ -9,6 +9,6 @@ namespace VodjenjeKaficaCSHARP.Data
         {
 
         }
-        public DbSet<Stavka> Stavke { get; set; }
+        public DbSet<Artikl> Artikli { get; set; }
     }
 }

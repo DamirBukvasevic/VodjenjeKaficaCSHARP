@@ -6,11 +6,11 @@ namespace VodjenjeKaficaCSHARP.Controllers
 {
     [ApiController]
     [Route("Api/v1/[Controller]")]
-    public class StavkaController:ControllerBase
+    public class ArtiklController:ControllerBase
     {
         private readonly VodjenjeKaficaContext _context;
 
-        public StavkaController(VodjenjeKaficaContext context)
+        public ArtiklController(VodjenjeKaficaContext context)
         {
             _context = context;
         }
@@ -18,37 +18,35 @@ namespace VodjenjeKaficaCSHARP.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok(_context.Stavke);
+            return Ok(_context.Artikli);
         }
 
         [HttpGet]
         [Route("{Sifra:int}")]
         public IActionResult GetBySifra(int Sifra)
         {
-            return Ok(_context.Stavke.Find(Sifra));
+            return Ok(_context.Artikli.Find(Sifra));
         }
 
         [HttpPost]
-        public IActionResult Post(Stavka stavka)
+        public IActionResult Post(Artikl artikl)
         {
-            _context.Stavke.Add(stavka);
+            _context.Artikli.Add(artikl);
             _context.SaveChanges();
-            return StatusCode(StatusCodes.Status201Created, stavka);
+            return StatusCode(StatusCodes.Status201Created, artikl);
         }
 
         [HttpPut]
         [Route("{Sifra:int}")]
         [Produces("application/json")]
-        public IActionResult Put(int Sifra, Stavka stavka)
+        public IActionResult Put(int Sifra, Artikl artikl)
         {
-            var StavkeIzBaze = _context.Stavke.Find(Sifra);
+            var ArtikliIzBaze = _context.Artikli.Find(Sifra);
 
-            StavkeIzBaze.SifraNabave = stavka.SifraNabave;
-            StavkeIzBaze.SifraArtikla = stavka.SifraArtikla;
-            StavkeIzBaze.KolicinaArtikla = stavka.KolicinaArtikla;
-            StavkeIzBaze.CijenaArtikla = stavka.CijenaArtikla;
+            ArtikliIzBaze.Sifra = artikl.Sifra;
+            ArtikliIzBaze.NazivArtikla = artikl.NazivArtikla;
 
-            _context.Stavke.Update(StavkeIzBaze);
+            _context.Artikli.Update(ArtikliIzBaze);
             _context.SaveChanges();
 
             return Ok(new { poruka = "Uspješno promjenjeno" });
@@ -59,8 +57,8 @@ namespace VodjenjeKaficaCSHARP.Controllers
         [Produces("application/json")]
         public IActionResult Delete(int Sifra)
         {
-            var StavkeIzBaze = _context.Stavke.Find(Sifra);
-            _context.Stavke.Remove(StavkeIzBaze);
+            var ArtikliIzBaze = _context.Artikli.Find(Sifra);
+            _context.Artikli.Remove(ArtikliIzBaze);
             _context.SaveChanges();
 
             return Ok(new { poruka = "Uspješno obrisano" });
