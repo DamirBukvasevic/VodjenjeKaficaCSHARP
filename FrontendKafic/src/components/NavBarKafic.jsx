@@ -17,7 +17,7 @@ export default function NavBarKafic(){
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             <Nav.Link onClick={()=>navigate(RoutesNames.HOME)}>Početna</Nav.Link>
-            <Nav.Link href="#link">Swagger</Nav.Link>
+            <Nav.Link href="https://damirbukva-001-site1.gtempurl.com/swagger/index.html" target="_blank">Swagger</Nav.Link>
             <NavDropdown title="Izbornik" id="basic-nav-dropdown">
               <NavDropdown.Item onClick={()=>navigate(RoutesNames.DOBAVLJAC_PREGLED)}>Dobavljaci</NavDropdown.Item>
               <NavDropdown.Divider />
