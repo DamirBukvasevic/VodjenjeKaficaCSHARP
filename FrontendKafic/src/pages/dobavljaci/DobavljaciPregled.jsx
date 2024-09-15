@@ -22,16 +22,16 @@ export default function DobavljaciPregled(){
     return(
         <Container>
             <Table striped bordered hover responsive>
-                <thead>
+                <thead class="naslovAPP">
                     <tr>
-                        <th>Naziv</th>
+                        <th>Naziv dobavljača</th>
                         <th>Grad</th>
                         <th>Adresa</th>
-                        <th>Oib</th>
+                        <th>OIB</th>
                         <th>Šifra</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody class="bodyAPP">
                     {dobavljaci && dobavljaci.map((dobavljac,index)=>(
                         <tr key={index}>
                             <td>{dobavljac.naziv}</td>

@@ -4,3 +4,32 @@
 .sredina{
     text-align: center;
 }
+#naslov{
+    width: 100%;
+    height: auto;
+    background-color: #d9d9e6;
+}
+#naslov h1{
+    text-align: center;
+    font-size: 10px;
+    margin-top: 0.3%;
+}
+body{
+    background-color: #d9d9e6;
+}
+.table-responsive{
+    margin-top: 2%;
+}
+.nav-item.dropdown{
+    margin-left: 407%;
+    border: solid 1px;
+    border-radius: 5%;
+}
+.naslovAPP{
+    border: solid 2px;
+    text-align: center;
+}
+.bodyAPP{
+    border: solid 1px;
+    text-align: center;
+}

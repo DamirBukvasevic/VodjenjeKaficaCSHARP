@@ -22,13 +22,13 @@ export default function ArtikliPregled(){
     return(
         <Container>
             <Table striped bordered hover responsive>
-                <thead>
+                <thead class="naslovAPP">
                     <tr>
                         <th>Naziv Artikla</th>
                         <th>Šifra</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody class="bodyAPP">
                     {artikli && artikli.map((artikl,index)=>(
                         <tr key={index}>
                             <td>{artikl.nazivArtikla}</td>
