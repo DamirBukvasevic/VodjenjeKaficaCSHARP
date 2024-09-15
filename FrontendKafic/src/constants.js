@@ -5,3 +5,5 @@ export const RoutesNames = {
     DOBAVLJAC_PREGLED: '/dobavljaci'
 
 };
+
+export const BACKEND_URL = 'https://damirbukva-001-site1.gtempurl.com/Api/v1';

@@ -1,10 +1,42 @@
-import { Container } from "react-bootstrap";
+import { Container, Table } from "react-bootstrap";
+import ArtiklService from "../../services/ArtiklService";
+import { useEffect, useState } from "react";
 
 
 export default function ArtikliPregled(){
+
+    const[artikli,setArtikli] = useState();
+
+    async function dohvatiArtikle() {
+        await ArtiklService.get()
+        .then((odgovor)=>{
+            setArtikli(odgovor);
+        })
+        .catch((e)=>console.error(e));
+    }
+
+    useEffect(()=>{
+        dohvatiArtikle();
+    },[]);
+
     return(
         <Container>
-            Pregled artikala
+            <Table striped bordered hover responsive>
+                <thead>
+                    <tr>
+                        <th>Naziv Artikla</th>
+                        <th>Šifra</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {artikli && artikli.map((artikl,index)=>(
+                        <tr key={index}>
+                            <td>{artikl.nazivArtikla}</td>
+                            <td>{artikl.sifra}</td>
+                        </tr>
+                    ))}
+                </tbody>
+            </Table>
         </Container>
     )
 }
