@@ -4,6 +4,9 @@
 .sredina{
     text-align: center;
 }
+.siroko{
+    width: 100%;
+}
 #naslov{
     width: 100%;
     height: auto;
@@ -19,11 +22,6 @@ body{
 }
 .table-responsive{
     margin-top: 2%;
-}
-.nav-item.dropdown{
-    margin-left: 407%;
-    border: solid 1px;
-    border-radius: 5%;
 }
 .naslovAPP{
     border: solid 2px;
