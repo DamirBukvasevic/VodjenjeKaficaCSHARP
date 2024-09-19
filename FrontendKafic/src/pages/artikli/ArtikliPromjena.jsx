@@ -68,6 +68,7 @@ export default function ArtikliPromjena(){
                     </Col>
                 </Row>
             </Form>
+            <hr />
         </Container>
     )
 }

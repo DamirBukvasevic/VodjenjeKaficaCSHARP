@@ -9,12 +9,66 @@
 }
 #naslov{
     width: 100%;
-    height: auto;
-    background-color: #babad1;
+    height: 30px;
+    padding-top: 5px;
+    background-color: #d9d9e6;
 }
 #naslov h1{
     text-align: center;
     font-size: 15px;
+    bottom: 0;
+}
+#navbarSticky{
+    width: 100%;
+    height: auto;
+    margin-bottom: 7px;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    border: solid 1px;
+}
+.nav-link{
+    border: solid 1px;
+    border-radius: 5px;
+    margin-left: 2%;
+    margin-right: 2%;
+    text-align: center;
+}
+.nav-link:hover{
+    background-color: #0b5ed7;
+    border-color: #0b5ed7;
+    color: #fff;
+}
+.swagger{
+    color: #4a4f53!important;
+}
+.swagger:hover{
+    background-color: #0b5ed7;
+    border-color: #0b5ed7;
+    color: #fff!important;
+}
+.artiklDodaj{
+    text-decoration: none;
+    font-size: 15px;
+    color: #4a4f53;
+    display: inline-block;
+    padding: 5px;
+    text-align: center;
+    border: solid 1px;
+    border-color: black;
+    border-radius: 5px;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 65px;
+    background-color: #fff;
+}
+.artiklDodaj:hover{
+    background-color: #0b5ed7;
+    border-color: #0b5ed7;
+    color: #fff;
+}
+.table-responsive{
+    margin-top: 7px!important;
 }
 body{
     background-color: #d9d9e6;
@@ -24,7 +78,7 @@ body{
     margin-top: 2%;
 }
 .naslovAPP{
-    border: solid 2px;
+    border: solid 1px;
     text-align: center;
 }
 .bodyAPP{
@@ -33,12 +87,14 @@ body{
 }
 #footer{
     height: 30px;
-    background-color: #babad1;
+    background-color: white;
     position: -webkit-sticky;
     position: sticky;
+    border: solid 1px;
     bottom: 0;
 }
 #footer h2{
+    padding-top: 5px;
     text-align: center;
     font-size: 15px;
 }

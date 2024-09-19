@@ -30,7 +30,7 @@ export default function ArtikliDodaj(){
     return(
         <Container>
             <hr />
-                Dodavanje novog artikla
+                Unos novog artikla
             <hr />
             <Form onSubmit={obradiSubmit}>
                 <Form.Group controlId="naziv">
@@ -52,6 +52,7 @@ export default function ArtikliDodaj(){
                     </Col>
                 </Row>
             </Form>
+            <hr />
         </Container>
     )
 }

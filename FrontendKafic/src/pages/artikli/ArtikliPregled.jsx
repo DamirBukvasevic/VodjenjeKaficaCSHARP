@@ -38,7 +38,7 @@ export default function ArtikliPregled(){
 
     return(
         <Container>
-            <Link to={RoutesNames.ARTIKL_NOVI} >Dodaj novi artikl</Link>
+            <Link className="artiklDodaj" to={RoutesNames.ARTIKL_NOVI} >Unos novog artikla  +</Link>
             <Table striped bordered hover responsive>
                 <thead className="naslovAPP">
                     <tr>
