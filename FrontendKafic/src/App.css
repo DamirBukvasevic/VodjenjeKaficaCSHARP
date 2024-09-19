@@ -10,15 +10,15 @@
 #naslov{
     width: 100%;
     height: auto;
-    background-color: #d9d9e6;
+    background-color: #babad1;
 }
 #naslov h1{
     text-align: center;
-    font-size: 10px;
-    margin-top: 0.3%;
+    font-size: 15px;
 }
 body{
     background-color: #d9d9e6;
+    min-height: 100vh;
 }
 .table-responsive{
     margin-top: 2%;
@@ -30,4 +30,15 @@ body{
 .bodyAPP{
     border: solid 1px;
     text-align: center;
+}
+#footer{
+    height: 30px;
+    background-color: #babad1;
+    position: -webkit-sticky;
+    position: sticky;
+    bottom: 0;
+}
+#footer h2{
+    text-align: center;
+    font-size: 15px;
 }
