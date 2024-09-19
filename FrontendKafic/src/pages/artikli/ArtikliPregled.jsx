@@ -40,13 +40,13 @@ export default function ArtikliPregled(){
         <Container>
             <Link to={RoutesNames.ARTIKL_NOVI} >Dodaj novi artikl</Link>
             <Table striped bordered hover responsive>
-                <thead class="naslovAPP">
+                <thead className="naslovAPP">
                     <tr>
                         <th>Naziv Artikla</th>
                         <th>Akcija</th>
                     </tr>
                 </thead>
-                <tbody class="bodyAPP">
+                <tbody className="bodyAPP">
                     {artikli && artikli.map((artikl,index)=>(
                         <tr key={index}>
                             <td>{artikl.nazivArtikla}</td>

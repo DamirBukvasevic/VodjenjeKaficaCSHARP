@@ -43,7 +43,6 @@ namespace VodjenjeKaficaCSHARP.Controllers
         {
             var ArtikliIzBaze = _context.Artikli.Find(Sifra);
 
-            ArtikliIzBaze.Sifra = artikl.Sifra;
             ArtikliIzBaze.NazivArtikla = artikl.NazivArtikla;
 
             _context.Artikli.Update(ArtikliIzBaze);
