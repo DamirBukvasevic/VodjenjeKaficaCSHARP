@@ -20,7 +20,7 @@ export default function DobavljaciPregled(){
     },[]);
 
     return(
-        <Container>
+        <>
             <Table striped bordered hover responsive>
                 <thead class="naslovAPP">
                     <tr>
@@ -43,6 +43,6 @@ export default function DobavljaciPregled(){
                     ))}
                 </tbody>
             </Table>
-        </Container>
+        </>
     )
 }

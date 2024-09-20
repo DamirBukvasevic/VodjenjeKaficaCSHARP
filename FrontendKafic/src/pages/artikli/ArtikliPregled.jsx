@@ -1,4 +1,4 @@
-import { Button, Container, Table } from "react-bootstrap";
+import { Button, Table } from "react-bootstrap";
 import ArtiklService from "../../services/ArtiklService";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
@@ -37,7 +37,7 @@ export default function ArtikliPregled(){
     }
 
     return(
-        <Container>
+        <>
             <Link className="artiklDodaj" to={RoutesNames.ARTIKL_NOVI} >Unos novog artikla  +</Link>
             <Table striped bordered hover responsive>
                 <thead className="naslovAPP">
@@ -67,6 +67,6 @@ export default function ArtikliPregled(){
                     ))}
                 </tbody>
             </Table>
-        </Container>
+        </>
     )
 }

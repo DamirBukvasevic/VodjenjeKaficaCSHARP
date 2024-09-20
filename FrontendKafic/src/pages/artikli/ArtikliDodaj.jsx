@@ -1,4 +1,4 @@
-import { Button, Col, Container, Form, Row } from "react-bootstrap";
+import { Button, Col, Form, Row } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { RoutesNames } from "../../constants";
 import ArtiklService from "../../services/ArtiklService";
@@ -28,7 +28,7 @@ export default function ArtikliDodaj(){
     }
 
     return(
-        <Container>
+        <>
             <hr />
                 Unos novog artikla
             <hr />
@@ -53,6 +53,6 @@ export default function ArtikliDodaj(){
                 </Row>
             </Form>
             <hr />
-        </Container>
+        </>
     )
 }

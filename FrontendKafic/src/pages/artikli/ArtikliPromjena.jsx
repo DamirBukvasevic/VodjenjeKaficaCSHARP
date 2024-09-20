@@ -1,4 +1,4 @@
-import { Button, Col, Container, Form, Row } from "react-bootstrap";
+import { Button, Col, Form, Row } from "react-bootstrap";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { RoutesNames } from "../../constants";
 import ArtiklService from "../../services/ArtiklService";
@@ -44,7 +44,7 @@ export default function ArtikliPromjena(){
     }
 
     return(
-        <Container>
+        <>
             <hr />
                 Promjena artikla
             <hr />
@@ -69,6 +69,6 @@ export default function ArtikliPromjena(){
                 </Row>
             </Form>
             <hr />
-        </Container>
+        </>
     )
 }

@@ -8,19 +8,25 @@ import ArtikliPregled from './pages/artikli/ArtikliPregled'
 import DobavljaciPregled from './pages/dobavljaci/DobavljaciPregled'
 import ArtikliDodaj from './pages/artikli/ArtikliDodaj'
 import ArtikliPromjena from './pages/artikli/ArtikliPromjena'
+import { Container } from 'react-bootstrap'
 
 function App() {
 
   return (
     <>
-      <NavBarKafic />
-      <Routes>
-        <Route path={RoutesNames.HOME} element={<Pocetna />} />
-        <Route path={RoutesNames.ARTIKL_PREGLED} element={<ArtikliPregled />} />
-        <Route path={RoutesNames.ARTIKL_NOVI} element={<ArtikliDodaj />} />
-        <Route path={RoutesNames.ARTIKL_PROMJENA} element={<ArtikliPromjena />} />
-        <Route path={RoutesNames.DOBAVLJAC_PREGLED} element={<DobavljaciPregled />} />
-      </Routes>
+      <Container className='visina'>
+        <NavBarKafic />
+        <Routes>
+          <Route path={RoutesNames.HOME} element={<Pocetna />} />
+          <Route path={RoutesNames.ARTIKL_PREGLED} element={<ArtikliPregled />} />
+          <Route path={RoutesNames.ARTIKL_NOVI} element={<ArtikliDodaj />} />
+          <Route path={RoutesNames.ARTIKL_PROMJENA} element={<ArtikliPromjena />} />
+          <Route path={RoutesNames.DOBAVLJAC_PREGLED} element={<DobavljaciPregled />} />
+        </Routes>
+      </Container>
+      <Container className='footer'>
+          <h2>Kafic APP v.1.0.1   &copy; All rights reserved</h2>
+      </Container>
     </>
   )
 }
