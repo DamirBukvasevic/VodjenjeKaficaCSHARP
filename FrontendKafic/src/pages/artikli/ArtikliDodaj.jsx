@@ -37,12 +37,12 @@ export default function ArtikliDodaj(){
                     <Form.Label>Naziv</Form.Label>
                     <Form.Control type="text" name="naziv" required />
                 </Form.Group>
-                <hr />
+            <hr />
                 <Row>
                     <Col xs={6} sm={6} md={3} lg={6} xl={6} xxl={6}>
                     <Link to={RoutesNames.ARTIKL_PREGLED}
-                    className="btn btn-danger siroko">
-                    Odustani
+                        className="btn btn-danger siroko">
+                        Odustani
                     </Link>
                     </Col>
                     <Col xs={6} sm={6} md={9} lg={6} xl={6} xxl={6}>

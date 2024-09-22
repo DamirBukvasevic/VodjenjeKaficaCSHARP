@@ -43,7 +43,6 @@ namespace VodjenjeKaficaCSHARP.Controllers
         {
             var DobavljaciIzBaze = _context.Dobavljaci.Find(Sifra);
 
-            DobavljaciIzBaze.Sifra = dobavljac.Sifra;
             DobavljaciIzBaze.Naziv = dobavljac.Naziv;
             DobavljaciIzBaze.Grad = dobavljac.Grad;
             DobavljaciIzBaze.Adresa = dobavljac.Adresa;

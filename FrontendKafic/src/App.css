@@ -46,7 +46,7 @@
     border-color: #0b5ed7;
     color: #fff!important;
 }
-.artiklDodaj{
+.artiklDodaj, .dobavljacDodaj{
     text-decoration: none;
     font-size: 15px;
     color: #4a4f53;
@@ -59,7 +59,7 @@
     top: 67px;
     background-color: #fff;
 }
-.artiklDodaj:hover{
+.artiklDodaj:hover, .dobavljacDodaj:hover{
     background-color: #0b5ed7;
     border-color: #0b5ed7;
     color: #fff;

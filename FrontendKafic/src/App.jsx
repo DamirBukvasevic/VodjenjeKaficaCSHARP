@@ -5,10 +5,11 @@ import { Route, Routes } from 'react-router-dom'
 import { RoutesNames } from './constants'
 import Pocetna from './pages/Pocetna'
 import ArtikliPregled from './pages/artikli/ArtikliPregled'
-import DobavljaciPregled from './pages/dobavljaci/DobavljaciPregled'
 import ArtikliDodaj from './pages/artikli/ArtikliDodaj'
 import ArtikliPromjena from './pages/artikli/ArtikliPromjena'
 import { Container } from 'react-bootstrap'
+import DobavljaciPregled from './pages/dobavljaci/DobavljaciPregled'
+import DobavljaciDodaj from './pages/dobavljaci/DobavljaciDodaj'
 
 function App() {
 
@@ -22,6 +23,7 @@ function App() {
           <Route path={RoutesNames.ARTIKL_NOVI} element={<ArtikliDodaj />} />
           <Route path={RoutesNames.ARTIKL_PROMJENA} element={<ArtikliPromjena />} />
           <Route path={RoutesNames.DOBAVLJAC_PREGLED} element={<DobavljaciPregled />} />
+          <Route path={RoutesNames.DOBAVLJAC_NOVI} element={<DobavljaciDodaj />} />
         </Routes>
       </Container>
       <Container className='footer'>
