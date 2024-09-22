@@ -59,7 +59,7 @@ export default function DobavljaciPregled(){
                             <td>
                                 <Button
                                 variant="primary"
-                                onClick={()=>navigate(`/dobavljac/${dobavljac.sifra}`)}>
+                                onClick={()=>navigate(`/dobavljaci/${dobavljac.sifra}`)}>
                                     Promjeni
                                 </Button>
                                 &nbsp;&nbsp;&nbsp;

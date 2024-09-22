@@ -22,7 +22,7 @@ export default function ArtikliPromjena(){
 
     useEffect(()=>{
         dohvatiArtikl();
-    },[]);
+    });
 
     async function promjena(artikl){
         const odgovor = await ArtiklService.promjena(routeParams.sifra,artikl);

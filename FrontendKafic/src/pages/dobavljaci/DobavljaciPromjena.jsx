@@ -1,17 +1,34 @@
 import { Button, Col, Form, Row } from "react-bootstrap";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { RoutesNames } from "../../constants";
-import DobavljacServices from "../../services/DobavljacService";
+import DobavljacService from "../../services/DobavljacService";
+import { useEffect, useState } from "react";
 
 
-export default function DobavljaciDodaj(){
+
+export default function DobavljaciPromjena(){
 
     const navigate = useNavigate();
+    const routeParams = useParams();
+    const [dobavljac,setDobavljac] = useState({});
 
-    async function dodaj(dobavljac){
-        const odgovor = await DobavljacServices.dodaj(dobavljac);
+    async function dohvatiDobavljaca(){
+        const odgovor = await DobavljacService.getBySifra(routeParams.sifra);
         if(odgovor.greska){
-            alert(odgovor.poruka)
+            alert(odgovor.poruka);
+            return;
+        }
+        setDobavljac(odgovor.poruka);
+    }
+
+    useEffect(()=>{
+        dohvatiDobavljaca();
+    });
+
+    async function promjena(dobavljac){
+        const odgovor = await DobavljacService.promjena(routeParams.sifra,dobavljac);
+        if(odgovor.greska){
+            alert(odgovor.poruka);
             return;
         }
         navigate(RoutesNames.DOBAVLJAC_PREGLED);
@@ -20,9 +37,9 @@ export default function DobavljaciDodaj(){
     function obradiSubmit(e){
         e.preventDefault();
 
-        const podaci = new FormData(e.target);
+        const podaci = new FormData(e.triger);
 
-        dodaj({
+        promjena({
             naziv: podaci.get('naziv'),
             grad: podaci.get('grad'),
             adresa: podaci.get('adresa'),
@@ -33,29 +50,29 @@ export default function DobavljaciDodaj(){
     return(
         <>
             <hr />
-                Unos novog dobavljaca
+                Promjena podataka dobavljaca
             <hr />
             <Form onSubmit={obradiSubmit}>
                 <Form.Group controlId="naziv">
                     <Form.Label>Naziv</Form.Label>
-                    <Form.Control type="text" name="naziv" required />
+                    <Form.Control type="text" name="naziv" required defaultValue={dobavljac.naziv} />
                 </Form.Group>
-            <hr />    
+                <hr />    
                 <Form.Group controlId="grad">
                     <Form.Label>Grad</Form.Label>
-                    <Form.Control type="text" name="grad" required />
+                    <Form.Control type="text" name="grad" required defaultValue={dobavljac.grad} />
                 </Form.Group>
-            <hr />
+                <hr />
                 <Form.Group controlId="adresa">
                     <Form.Label>Adresa</Form.Label>
-                    <Form.Control type="text" name="adresa" required />
+                    <Form.Control type="text" name="adresa" required defaultValue={dobavljac.adresa} />
                 </Form.Group>
-            <hr />
-            <Form.Group controlId="oib">
+                <hr />
+                <Form.Group controlId="oib">
                     <Form.Label>OIB</Form.Label>
-                    <Form.Control type="number" minNumber={1000000000} maxNumber={99999999999} name="oib" required />
+                    <Form.Control type="number" minNumber={1000000000} maxNumber={99999999999} name="oib" required defaultValue={dobavljac.oib} />
                 </Form.Group>
-            <hr />
+                <hr />
                 <Row>
                     <Col xs={6} sm={6} md={3} lg={6} xl={6} xxl={6}>
                     <Link to={RoutesNames.DOBAVLJAC_PREGLED}
@@ -65,7 +82,7 @@ export default function DobavljaciDodaj(){
                     </Col>
                     <Col xs={6} sm={6} md={9} lg={6} xl={6} xxl={6}>
                     <Button variant="primary" type="submit" className="siroko">
-                        Dodaj novog dobavljaca
+                        Promjeni podatke dobavljaca
                     </Button>
                     </Col>
                 </Row>

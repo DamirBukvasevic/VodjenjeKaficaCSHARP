@@ -95,3 +95,6 @@ body{
     text-align: center;
     font-size: 15px;
 }
+.naslovAPP, th{
+    background-color: #a4a5b6!important;
+}
