@@ -14,7 +14,7 @@ async function getBySifra(sifra){
     .then((odgovor)=>{
         return {greska: false, poruka: odgovor.data}
     })
-    .catch((e)=>{
+    .catch(()=>{
         return {greska: true, poruka: 'Artikl ne postoji!'}
     })
 }
@@ -24,7 +24,7 @@ async function obrisi(sifra) {
     .then((odgovor)=>{
         return {greska: false, poruka: odgovor.data.poruka}
     })
-    .catch((e)=>{
+    .catch(()=>{
         return {greska: true, poruka: 'Artikl se ne može obrisati!'}
     })
 }
@@ -34,7 +34,7 @@ async function dodaj(artikl) {
     .then((odgovor)=>{
         return {greska: false, poruka: odgovor.data}
     })
-    .catch((e)=>{
+    .catch(()=>{
         return {greska: true, poruka: 'Artikl se ne može dodati!'}
     })
 }
@@ -44,7 +44,7 @@ async function promjena(sifra,artikl) {
     .then((odgovor)=>{
         return {greska: false, poruka: odgovor.data}
     })
-    .catch((e)=>{
+    .catch(()=>{
         return {greska: true, poruka: 'Artikl se ne može promjeniti!'}
     })
 }
