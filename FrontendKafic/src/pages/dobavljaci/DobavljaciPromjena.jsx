@@ -37,7 +37,7 @@ export default function DobavljaciPromjena(){
     function obradiSubmit(e){
         e.preventDefault();
 
-        const podaci = new FormData(e.triger);
+        const podaci = new FormData(e.target);
 
         promjena({
             naziv: podaci.get('naziv'),

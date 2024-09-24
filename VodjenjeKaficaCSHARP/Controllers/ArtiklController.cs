@@ -1,31 +1,56 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using VodjenjeKaficaCSHARP.Data;
 using VodjenjeKaficaCSHARP.Models;
+using VodjenjeKaficaCSHARP.Models.DTO;
 
 namespace VodjenjeKaficaCSHARP.Controllers
 {
     [ApiController]
     [Route("Api/v1/[Controller]")]
-    public class ArtiklController:ControllerBase
+    public class ArtiklController(VodjenjeKaficaContext context, IMapper mapper) : VodjenjeKaficaController(context, mapper)
     {
-        private readonly VodjenjeKaficaContext _context;
-
-        public ArtiklController(VodjenjeKaficaContext context)
-        {
-            _context = context;
-        }
-
+  
         [HttpGet]
-        public IActionResult Get()
+        public ActionResult<List<ArtiklDTORead>> Get()
         {
-            return Ok(_context.Artikli);
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(new { poruka = ModelState });
+            }
+            try
+            {
+                return Ok(_mapper.Map<List<ArtiklDTORead>>(_context.Artikli));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { poruka = ex.Message });
+            }
         }
 
         [HttpGet]
         [Route("{Sifra:int}")]
-        public IActionResult GetBySifra(int Sifra)
+        public ActionResult<ArtiklDTORead> GetBySifra(int Sifra)
         {
-            return Ok(_context.Artikli.Find(Sifra));
+            if (ModelState.IsValid)
+            {
+                return BadRequest(new { poruka = ModelState } );
+            }
+            Artikl? e;
+            try
+            {
+                e = _context.Artikli.Find(sifra);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { poruka = ex.Message });
+            }
+            if (e == null)
+            {
+                return NotFound(new { poruka = "Artikl ne postoji u bazi" });
+            }
+            return Ok(_mapper.Map<ArtiklDTORead>(e));
+
         }
 
         [HttpPost]
