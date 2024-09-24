@@ -23,7 +23,7 @@ export default function DobavljaciPromjena(){
 
     useEffect(()=>{
         dohvatiDobavljaca();
-    });
+    },[]);
 
     async function promjena(dobavljac){
         const odgovor = await DobavljacService.promjena(routeParams.sifra,dobavljac);
