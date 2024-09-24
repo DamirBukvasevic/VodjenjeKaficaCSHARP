@@ -1,5 +1,6 @@
 using VodjenjeKaficaCSHARP.Data;
 using Microsoft.EntityFrameworkCore;
+using VodjenjeKaficaCSHARP.Mapping;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,6 +26,9 @@ builder.Services.AddCors(opcije =>
     );
 
 });
+
+//automapper
+builder.Services.AddAutoMapper(typeof(VodjenjeKaficaMappingProfile));
 
 var app = builder.Build();
 

@@ -39,7 +39,7 @@ namespace VodjenjeKaficaCSHARP.Controllers
             Artikl? e;
             try
             {
-                e = _context.Artikli.Find(sifra);
+                e = _context.Artikli.Find(Sifra);
             }
             catch (Exception ex)
             {
@@ -54,26 +54,61 @@ namespace VodjenjeKaficaCSHARP.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post(Artikl artikl)
+        public IActionResult Post(ArtiklDTOInsertUpdate dto)
         {
-            _context.Artikli.Add(artikl);
-            _context.SaveChanges();
-            return StatusCode(StatusCodes.Status201Created, artikl);
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(new { poruka = ModelState});
+            }
+            try
+            {
+                var e = _mapper.Map<Artikl>(dto);
+                _context.Artikli.Add(e);
+                _context.SaveChanges();
+                return StatusCode(StatusCodes.Status201Created, _mapper.Map<ArtiklDTORead>(e));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { poruka = ex.Message });
+            }
         }
 
         [HttpPut]
         [Route("{Sifra:int}")]
         [Produces("application/json")]
-        public IActionResult Put(int Sifra, Artikl artikl)
+        public IActionResult Put(int Sifra, ArtiklDTOInsertUpdate dto)
         {
-            var ArtikliIzBaze = _context.Artikli.Find(Sifra);
+            if (ModelState.IsValid)
+            {
+                return BadRequest(new { poruka = ModelState });
+            }
+            try
+            {
+                Artikl? e;
+                try
+                {
+                    e = _context.Artikli.Find(Sifra);
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest(new { poruka = ex.Message });
+                }
+                if (e == null)
+                {
+                    return NotFound(new { poruka = "Artikl ne postoji u bazi" });
+                }
 
-            ArtikliIzBaze.NazivArtikla = artikl.NazivArtikla;
+                e = _mapper.Map(dto, e);
 
-            _context.Artikli.Update(ArtikliIzBaze);
-            _context.SaveChanges();
+                _context.Artikli.Update(e);
+                _context.SaveChanges();
 
-            return Ok(new { poruka = "Uspješno promjenjeno" });
+                return Ok(new { poruka = "Uspješna promjena podataka" });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { poruka = ex.Message });
+            }
         }
 
         [HttpDelete]
@@ -81,11 +116,33 @@ namespace VodjenjeKaficaCSHARP.Controllers
         [Produces("application/json")]
         public IActionResult Delete(int Sifra)
         {
-            var ArtikliIzBaze = _context.Artikli.Find(Sifra);
-            _context.Artikli.Remove(ArtikliIzBaze);
-            _context.SaveChanges();
-
-            return Ok(new { poruka = "Uspješno obrisano" });
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(new { poruka = ModelState });
+            }
+            try
+            {
+                Artikl? e;
+                try
+                {
+                    e = _context.Artikli.Find(Sifra);
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest(new { poruka = ex.Message });
+                }
+                if (e == null)
+                {
+                    return NotFound("Artikl ne postoji u bazi");
+                }
+                _context.Artikli.Remove(e);
+                _context.SaveChanges();
+                return Ok(new { poruka = "Uspješno obrisano"});
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { poruka = ex.Message });
+            }
         }
     }
 }

@@ -70,7 +70,7 @@ export default function DobavljaciPromjena(){
                 <hr />
                 <Form.Group controlId="oib">
                     <Form.Label>OIB</Form.Label>
-                    <Form.Control type="number" minNumber={1000000000} maxNumber={99999999999} name="oib" required defaultValue={dobavljac.oib} />
+                    <Form.Control type="number" min={1000000000} max={99999999999} name="oib" required defaultValue={dobavljac.oib} />
                 </Form.Group>
                 <hr />
                 <Row>
