@@ -11,11 +11,10 @@ namespace VodjenjeKaficaCSHARP.Controllers
     public class DobavljacController(VodjenjeKaficaContext context, IMapper mapper) : VodjenjeKaficaController(context, mapper)
     {
 
-
         [HttpGet]
         public ActionResult<List<DobavljacDTORead>> Get()
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return BadRequest(new { poruka = ModelState });
             }
@@ -48,7 +47,7 @@ namespace VodjenjeKaficaCSHARP.Controllers
             }
             if (e == null)
             {
-                return NotFound(new { poruka = "Dobavljac ne postoji u bazi" });
+                return NotFound(new { poruka = "Dobavljač ne postoji u bazi" });
             }
             return Ok(_mapper.Map<DobavljacDTORead>(e));
         }
@@ -56,7 +55,7 @@ namespace VodjenjeKaficaCSHARP.Controllers
         [HttpPost]
         public ActionResult Post(DobavljacDTOInsertUpdate dto)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return BadRequest(new { poruka = ModelState });
             }
@@ -95,7 +94,7 @@ namespace VodjenjeKaficaCSHARP.Controllers
                 }
                 if (e == null)
                 {
-                    return NotFound(new { poruka = "Dobavljac ne postoji u bazi" });
+                    return NotFound(new { poruka = "Dobavljač ne postoji u bazi" });
                 }
 
                 e = _mapper.Map(dto, e);
@@ -103,7 +102,7 @@ namespace VodjenjeKaficaCSHARP.Controllers
                 _context.Dobavljaci.Update(e);
                 _context.SaveChanges();
 
-                return Ok(new { poruka = "Uspješno promjenjeno" });
+                return Ok(new { poruka = "Dobavljač uspješno promjenjen" });
             }
             catch (Exception ex)
             {
@@ -133,11 +132,11 @@ namespace VodjenjeKaficaCSHARP.Controllers
                 }
                 if (e == null)
                 {
-                    return NotFound(new { poruka = "Dobavljac ne postoji u bazi" });
+                    return NotFound(new { poruka = "Dobavljač ne postoji u bazi" });
                 }
                 _context.Dobavljaci.Remove(e);
                 _context.SaveChanges();
-                return Ok(new { poruka = "Uspješno obrisano" });
+                return Ok(new { poruka = "Dobavljač uspješno obrisan" });
             }
             catch (Exception ex)
             {

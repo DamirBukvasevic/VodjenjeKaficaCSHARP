@@ -3,6 +3,6 @@
 namespace VodjenjeKaficaCSHARP.Models.DTO
 {
     public record ArtiklDTOInsertUpdate(
-        [Required(ErrorMessage = "Naziv artikla obavezan")]string nazivArtikla
+        [Required(ErrorMessage = "Naziv artikla obavezan")]string? nazivArtikla
         );
 }

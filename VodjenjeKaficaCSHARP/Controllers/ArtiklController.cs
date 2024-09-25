@@ -32,7 +32,7 @@ namespace VodjenjeKaficaCSHARP.Controllers
         [Route("{Sifra:int}")]
         public ActionResult<ArtiklDTORead> GetBySifra(int Sifra)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return BadRequest(new { poruka = ModelState } );
             }
@@ -78,7 +78,7 @@ namespace VodjenjeKaficaCSHARP.Controllers
         [Produces("application/json")]
         public IActionResult Put(int Sifra, ArtiklDTOInsertUpdate dto)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return BadRequest(new { poruka = ModelState });
             }
@@ -103,7 +103,7 @@ namespace VodjenjeKaficaCSHARP.Controllers
                 _context.Artikli.Update(e);
                 _context.SaveChanges();
 
-                return Ok(new { poruka = "Uspješna promjena podataka" });
+                return Ok(new { poruka = "Artikl uspješno promjenjen" });
             }
             catch (Exception ex)
             {
@@ -137,7 +137,7 @@ namespace VodjenjeKaficaCSHARP.Controllers
                 }
                 _context.Artikli.Remove(e);
                 _context.SaveChanges();
-                return Ok(new { poruka = "Uspješno obrisano"});
+                return Ok(new { poruka = "Artikl uspješno obrisan"});
             }
             catch (Exception ex)
             {
