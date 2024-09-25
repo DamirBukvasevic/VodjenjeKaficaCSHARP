@@ -1,57 +1,114 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using VodjenjeKaficaCSHARP.Data;
 using VodjenjeKaficaCSHARP.Models;
+using VodjenjeKaficaCSHARP.Models.DTO;
 
 namespace VodjenjeKaficaCSHARP.Controllers
 {
     [ApiController]
     [Route("Api/v1/[Controller]")]
-    public class DobavljacController:ControllerBase
+    public class DobavljacController(VodjenjeKaficaContext context, IMapper mapper) : VodjenjeKaficaController(context, mapper)
     {
-        private readonly VodjenjeKaficaContext _context;
 
-        public DobavljacController(VodjenjeKaficaContext context)
-        {
-            _context = context;
-        }
 
         [HttpGet]
-        public IActionResult Get()
+        public ActionResult<List<DobavljacDTORead>> Get()
         {
-            return Ok(_context.Dobavljaci);
+            if (ModelState.IsValid)
+            {
+                return BadRequest(new { poruka = ModelState });
+            }
+            try
+            {
+                return Ok(_mapper.Map<List<DobavljacDTORead>>(_context.Dobavljaci));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { poruka = ex.Message });
+            }
         }
 
         [HttpGet]
         [Route("{Sifra:int}")]
-        public IActionResult GetBySifra(int Sifra)
+        public ActionResult<DobavljacDTORead> GetBySifra(int Sifra)
         {
-            return Ok(_context.Dobavljaci.Find(Sifra));
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(new { poruka = ModelState });
+            }
+            Dobavljac? e;
+            try
+            {
+                e = _context.Dobavljaci.Find(Sifra);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { poruka = ex.Message });
+            }
+            if (e == null)
+            {
+                return NotFound(new { poruka = "Dobavljac ne postoji u bazi" });
+            }
+            return Ok(_mapper.Map<DobavljacDTORead>(e));
         }
 
         [HttpPost]
-        public IActionResult Post(Dobavljac dobavljac)
+        public ActionResult Post(DobavljacDTOInsertUpdate dto)
         {
-            _context.Dobavljaci.Add(dobavljac);
-            _context.SaveChanges();
-            return StatusCode(StatusCodes.Status201Created, dobavljac);
+            if (ModelState.IsValid)
+            {
+                return BadRequest(new { poruka = ModelState });
+            }
+            try
+            {
+                var e = _mapper.Map<Dobavljac>(dto);
+                _context.Dobavljaci.Add(e);
+                _context.SaveChanges();
+                return StatusCode(StatusCodes.Status201Created, _mapper.Map<DobavljacDTORead>(e));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { poruka = ex.Message });
+            }
         }
 
         [HttpPut]
         [Route("{Sifra:int}")]
         [Produces("application/json")]
-        public IActionResult Put(int Sifra, Dobavljac dobavljac)
+        public IActionResult Put(int Sifra, DobavljacDTOInsertUpdate dto)
         {
-            var DobavljaciIzBaze = _context.Dobavljaci.Find(Sifra);
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(new { poruka = ModelState });
+            }
+            try
+            {
+                Dobavljac? e;
+                try
+                {
+                    e = _context.Dobavljaci.Find(Sifra);
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest(new { poruka = ex.Message });
+                }
+                if (e == null)
+                {
+                    return NotFound(new { poruka = "Dobavljac ne postoji u bazi" });
+                }
 
-            DobavljaciIzBaze.Naziv = dobavljac.Naziv;
-            DobavljaciIzBaze.Grad = dobavljac.Grad;
-            DobavljaciIzBaze.Adresa = dobavljac.Adresa;
-            DobavljaciIzBaze.Oib = dobavljac.Oib;
+                e = _mapper.Map(dto, e);
 
-            _context.Dobavljaci.Update(DobavljaciIzBaze);
-            _context.SaveChanges();
+                _context.Dobavljaci.Update(e);
+                _context.SaveChanges();
 
-            return Ok(new { poruka = "Uspješno promjenjeno" });
+                return Ok(new { poruka = "Uspješno promjenjeno" });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { poruka = ex.Message });
+            }
         }
 
         [HttpDelete]
@@ -59,11 +116,33 @@ namespace VodjenjeKaficaCSHARP.Controllers
         [Produces("application/json")]
         public IActionResult Delete(int Sifra)
         {
-            var DobavljaciIzBaze = _context.Dobavljaci.Find(Sifra);
-            _context.Dobavljaci.Remove(DobavljaciIzBaze);
-            _context.SaveChanges();
-
-            return Ok(new { poruka = "Uspješno obrisano" });
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(new { poruka = ModelState });
+            }
+            try
+            {
+                Dobavljac? e;
+                try
+                {
+                    e = _context.Dobavljaci.Find(Sifra);
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest(new { poruka = ex.Message });
+                }
+                if (e == null)
+                {
+                    return NotFound(new { poruka = "Dobavljac ne postoji u bazi" });
+                }
+                _context.Dobavljaci.Remove(e);
+                _context.SaveChanges();
+                return Ok(new { poruka = "Uspješno obrisano" });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { poruka = ex.Message });
+            }
         }
     }
 }

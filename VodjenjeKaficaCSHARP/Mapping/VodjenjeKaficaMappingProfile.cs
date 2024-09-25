@@ -12,6 +12,8 @@ namespace VodjenjeKaficaCSHARP.Mapping
             CreateMap<Artikl, ArtiklDTORead>();
             CreateMap<ArtiklDTOInsertUpdate, Artikl>();
 
+            CreateMap<Dobavljac, DobavljacDTORead>();
+            CreateMap<DobavljacDTOInsertUpdate, Dobavljac>();
         }
 
     }
