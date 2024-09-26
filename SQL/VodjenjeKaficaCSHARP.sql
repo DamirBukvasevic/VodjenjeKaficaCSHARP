@@ -1,12 +1,11 @@
-
-SELECT name, collation_name FROM sys.databases;
+﻿SELECT name, collation_name FROM sys.databases;
 GO
-ALTER DATABASE db_aacea2_edunovawp4_admin SET SINGLE_USER WITH
+ALTER DATABASE db_aacea2_edunovawp4 SET SINGLE_USER WITH
 ROLLBACK IMMEDIATE;
 GO
-ALTER DATABASE db_aacea2_edunovawp4_admin COLLATE Croatian_CI_AS;
+ALTER DATABASE db_aacea2_edunovawp4 COLLATE Croatian_CI_AS;
 GO
-ALTER DATABASE db_aacea2_edunovawp4_admin SET MULTI_USER;
+ALTER DATABASE db_aacea2_edunovawp4 SET MULTI_USER;
 GO
 SELECT name, collation_name FROM sys.databases;
 GO
@@ -55,9 +54,9 @@ alter table Stavke add foreign key (SifraArtikla) references Artikli(Sifra);
 
 --select * from dobavljaci;
 insert into Dobavljaci (Naziv, Grad, Adresa, Oib)values
-('Bijelic.doo','Osijek','Sv.Roka1',96752332364),
+('Bijelić.doo','Osijek','Sv.Roka1',96752332364),
 ('Atlantic.doo','Osijek','M.Gupca1',48037484195),
-('Roto.doo','Osijek','Gunduliceva1',82770989192);
+('Roto.doo','Osijek','Gunduličeva1',82770989192);
 
 --select * from artikli;
 insert into Artikli (NazivArtikla)values
@@ -70,7 +69,7 @@ insert into Artikli (NazivArtikla)values
 ('Tuborg 0.5 l'),
 ('Kozel 0.5 l'),
 ('Budweiser 0.5 l'),
-('Osjecko 0.5 l'),
+('Osječko 0.5 l'),
 ('Cedevita naranca 19 g'),
 ('Cedevita limun 19 g'),
 ('Cedevita grejp 19 g');
