@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-
+﻿
 namespace VodjenjeKaficaCSHARP.Models
 {
     public class Dobavljac: Entitet
@@ -8,7 +7,5 @@ namespace VodjenjeKaficaCSHARP.Models
         public string? Grad { get; set; }
         public string? Adresa { get; set; }
         public string? Oib { get; set; }
-
-        public ICollection<Dobavljac>? Dobavljaci { get; } = [];
     }
 }
