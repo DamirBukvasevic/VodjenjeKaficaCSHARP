@@ -1,4 +1,4 @@
-import { HttpService } from "./HttpService";
+import { HttpService } from "./HttpService"
 
 
 async function get(){
@@ -39,12 +39,11 @@ async function dodaj(artikl) {
         {
             case 400:
                 let poruke='';
-                for(const kljuc in e.response.data.errors)
-                {
+                for(const kljuc in e.response.data.errors){
                     poruke+= kljuc +': ' + e.response.data.errors[kljuc] [0] + '\n';
                 }
                 return {greska: true, poruka: poruke}
-                default:
+            default:
                 return {greska: true, poruka: 'Artikl se ne može dodati!'}
         }
     })

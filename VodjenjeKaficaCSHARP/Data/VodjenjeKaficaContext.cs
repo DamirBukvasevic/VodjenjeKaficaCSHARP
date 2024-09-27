@@ -11,11 +11,6 @@ namespace VodjenjeKaficaCSHARP.Data
         }
         public DbSet<Artikl> Artikli { get; set; }
         public DbSet<Dobavljac> Dobavljaci {get; set; }
-        public DbSet<Nabava> Nabave {  get; set; }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<Nabava>().HasOne(d => d.Dobavljac);
-        }
+        
     }
 }

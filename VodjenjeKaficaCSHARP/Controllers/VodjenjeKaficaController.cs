@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using VodjenjeKaficaCSHARP.Data;
-using VodjenjeKaficaCSHARP.Models;
 
 namespace VodjenjeKaficaCSHARP.Controllers
 {
