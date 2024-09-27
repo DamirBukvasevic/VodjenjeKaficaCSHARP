@@ -4,6 +4,6 @@ namespace VodjenjeKaficaCSHARP.Models
 {
     public class Artikl: Entitet
     {
-        public string? NazivArtikla { get; set; }
+        public string? nazivArtikla { get; set; }
     }
 }

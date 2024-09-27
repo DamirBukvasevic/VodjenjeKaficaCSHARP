@@ -34,7 +34,7 @@ async function dodaj(artikl) {
     .then((odgovor)=>{
         return {greska: false, poruka: odgovor.data}
     })
-    .catch((e)=>{
+    .catch(()=>{
         switch (e.status) 
         {
             case 400:

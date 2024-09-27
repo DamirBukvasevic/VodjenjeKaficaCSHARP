@@ -6,8 +6,8 @@ export const RoutesNames = {
     ARTIKL_PROMJENA: '/artikli/:sifra',
     DOBAVLJAC_PREGLED: '/dobavljaci',
     DOBAVLJAC_NOVI: '/dobavljaci/dodaj',
-    DOBAVLJAC_PROMJENA: '/dobavljaci/:sifra'
+    DOBAVLJAC_PROMJENA: '/dobavljaci/:sifra',
     
 };
 
-export const BACKEND_URL = 'https://damirbukva-001-site1.gtempurl.com/Api/v1';
+export const BACKEND_URL = 'https://damirbukva-001-site1.gtempurl.com/api/v1';

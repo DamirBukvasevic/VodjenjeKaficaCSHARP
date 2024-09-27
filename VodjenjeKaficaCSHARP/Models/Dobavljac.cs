@@ -1,5 +1,4 @@
-﻿
-namespace VodjenjeKaficaCSHARP.Models
+﻿namespace VodjenjeKaficaCSHARP.Models
 {
     public class Dobavljac: Entitet
     {

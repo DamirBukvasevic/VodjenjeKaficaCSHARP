@@ -53,7 +53,7 @@ namespace VodjenjeKaficaCSHARP.Controllers
         }
 
         [HttpPost]
-        public ActionResult Post(DobavljacDTOInsertUpdate dto)
+        public IActionResult Post(DobavljacDTOInsertUpdate dto)
         {
             if (!ModelState.IsValid)
             {

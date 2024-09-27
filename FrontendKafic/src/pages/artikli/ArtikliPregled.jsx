@@ -16,7 +16,7 @@ export default function ArtikliPregled(){
         .then((odgovor)=>{
             setArtikli(odgovor);
         })
-        .catch((e)=>console.error(e));
+        .catch((e)=>console.log(e));
     }
 
     useEffect(()=>{

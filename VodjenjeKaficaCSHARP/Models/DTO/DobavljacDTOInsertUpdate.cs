@@ -3,9 +3,9 @@
 namespace VodjenjeKaficaCSHARP.Models.DTO
 {
     public record DobavljacDTOInsertUpdate(
-        [Required(ErrorMessage = "Naziv dobavljača obavezan")] string? Naziv,
-        [Required(ErrorMessage = "Grad dobavljača obavezan")] string? Grad,
-        [Required(ErrorMessage = "Adresa dobavljača obavezna")] string? Adresa,
-        [Required(ErrorMessage = "Oib dobavljača obavezan")] string? Oib
+        [Required(ErrorMessage = "Naziv dobavljaca obavezan")] string? Naziv,
+        [Required(ErrorMessage = "Grad dobavljaca obavezan")] string? Grad,
+        [Required(ErrorMessage = "Adresa dobavljaca obavezna")] string? Adresa,
+        [Required(ErrorMessage = "Oib dobavljaca obavezan")] string? Oib
         ); 
 }
