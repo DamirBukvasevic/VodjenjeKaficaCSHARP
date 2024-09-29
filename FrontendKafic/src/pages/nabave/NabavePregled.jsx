@@ -10,6 +10,7 @@ import Service from "../../services/NabavaService";
 export default function NabavePregled(){
 
     const [nabave,setNabave] = useState();
+    
     let navigate = useNavigate();
 
     async function dohvatiNabave(){
