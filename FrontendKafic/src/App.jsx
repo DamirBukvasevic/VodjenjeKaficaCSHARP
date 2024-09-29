@@ -12,9 +12,19 @@ import DobavljaciPregled from './pages/dobavljaci/DobavljaciPregled'
 import DobavljaciDodaj from './pages/dobavljaci/DobavljaciDodaj'
 import DobavljaciPromjena from './pages/dobavljaci/DobavljaciPromjena'
 import NabavePregled from './pages/nabave/NabavePregled'
+import NabaveDodaj from './pages/nabave/NabaveDodaj'
 
 
 function App() {
+
+  function godina(){
+    const pocenta = 2024;
+    const trenutna = new Date().getFullYear();
+    if(pocenta===trenutna){
+      return trenutna;
+    }
+    return pocenta + ' - ' + trenutna;
+  }
 
   return (
     <>
@@ -32,10 +42,11 @@ function App() {
           <Route path={RoutesNames.DOBAVLJAC_PROMJENA} element={<DobavljaciPromjena />} />
 
           <Route path={RoutesNames.NABAVA_PREGLED} element={<NabavePregled />} />
+          <Route path={RoutesNames.NABAVA_NOVI} element={<NabaveDodaj />} />
         </Routes>
       </Container>
       <Container className='footer'>
-          <h2>Kafic APP v.1.0.1   &copy; All rights reserved</h2>
+          <h2>Kafic APP v.1.0.1   &copy; All rights reserved {godina()}</h2>
       </Container>
     </>
   )

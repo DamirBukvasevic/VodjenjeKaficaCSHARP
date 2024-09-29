@@ -10,6 +10,7 @@ export const RoutesNames = {
     DOBAVLJAC_PROMJENA: '/dobavljaci/:sifra',
 
     NABAVA_PREGLED: '/nabave',
+    NABAVA_NOVI: '/nabave/dodaj',
     
 };
 

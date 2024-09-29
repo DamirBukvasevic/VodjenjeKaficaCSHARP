@@ -51,7 +51,7 @@ export default function DobavljaciDodaj(){
                     <Form.Control type="text" name="adresa" required />
                 </Form.Group>
             <hr />
-            <Form.Group controlId="oib">
+                <Form.Group controlId="oib">
                     <Form.Label>OIB</Form.Label>
                     <Form.Control type="number" min={1000000000} max={99999999999} name="oib" required />
                 </Form.Group>
