@@ -1,7 +1,8 @@
 import { useEffect } from "react";
 import { useState } from "react";
-import { Container, Table } from "react-bootstrap";
-import { Link, useNavigate } from "react-router-dom";
+import { Button, Container, Table } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { RoutesNames } from "../../constants";
 import moment from "moment";
 
@@ -43,7 +44,7 @@ export default function NabavePregled(){
 
     return (
 
-        <>
+        <Container>
             <Link className="nabavaDodaj" to={RoutesNames.NABAVA_NOVI}>Unos nove nabave +</Link>
             <Table striped bordered hover responsive>
                 <thead className="naslovAPP">
@@ -53,8 +54,30 @@ export default function NabavePregled(){
                         <th>Dobavljač</th>
                     </tr>
                 </thead>
+                <tbody>
+                    {nabave && nabave.map((entitet,index)=>(
+                        <tr key={index}>
+                            <td>{entitet.BrojNabave}</td>
+                            <td>{formatirajDatum()}</td>
+                            <td>{entitet.DobavljacNaziv}</td>
+                            <td>
+                                <Button
+                                variant="primary"
+                                onClick={()=>navigate(`/nabave/${entitet.sifra}`)}>
+                                    Promjeni
+                                </Button>
+                                &nbsp;&nbsp;&nbsp;
+                                <Button
+                                variant="danger"
+                                onClick={()=>obrisiNabavu(entitet.sifra)}>
+                                    Obriši
+                                </Button>
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
             </Table>
-        </>
+        </Container>
 
     );
 

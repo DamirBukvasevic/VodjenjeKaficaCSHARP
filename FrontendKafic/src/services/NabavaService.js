@@ -44,7 +44,7 @@ async function dodaj(nabava) {
                     poruke+= kljuc +': ' + e.response.data.errors[kljuc][0] + '\n';
                 }
                 return {greska: true, poruka: poruke}
-                default:
+            default:
                 return {greska: true, poruka: 'Nabava se ne može dodati!'}
         }
     })
