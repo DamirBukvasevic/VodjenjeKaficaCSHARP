@@ -50,7 +50,7 @@ export default function DobavljaciPromjena(){
     return(
         <>
             <hr />
-                Promjena podataka dobavljaca
+                Promjena podataka dobavljača
             <hr />
             <Form onSubmit={obradiSubmit}>
                 <Form.Group controlId="naziv">

@@ -1,12 +1,11 @@
 import { useEffect } from "react";
 import { useState } from "react";
-import { Button, Container, Table } from "react-bootstrap";
+import { Button, Table } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { RoutesNames } from "../../constants";
 import moment from "moment";
-
-
+import Service from "../../services/NabavaService";
 
 export default function NabavePregled(){
 
@@ -44,7 +43,7 @@ export default function NabavePregled(){
 
     return (
 
-        <Container>
+        <>
             <Link className="nabavaDodaj" to={RoutesNames.NABAVA_NOVI}>Unos nove nabave +</Link>
             <Table striped bordered hover responsive>
                 <thead className="naslovAPP">
@@ -52,18 +51,19 @@ export default function NabavePregled(){
                         <th>Broj nabave</th>
                         <th>Datum nabave</th>
                         <th>Dobavljač</th>
+                        <th>Akcija</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody className="bodyAPP">
                     {nabave && nabave.map((entitet,index)=>(
                         <tr key={index}>
-                            <td>{entitet.BrojNabave}</td>
-                            <td>{formatirajDatum()}</td>
-                            <td>{entitet.DobavljacNaziv}</td>
+                            <td>{entitet.brojNabave}</td>
+                            <td>{formatirajDatum(entitet.datumNabave)}</td>
+                            <td>{entitet.dobavljacNaziv}</td>
                             <td>
                                 <Button
                                 variant="primary"
-                                onClick={()=>navigate(`/nabave/${entitet.sifra}`)}>
+                                onClick={()=>{navigate(`/nabave/${entitet.sifra}`)}}>
                                     Promjeni
                                 </Button>
                                 &nbsp;&nbsp;&nbsp;
@@ -77,7 +77,7 @@ export default function NabavePregled(){
                     ))}
                 </tbody>
             </Table>
-        </Container>
+        </>
 
     );
 

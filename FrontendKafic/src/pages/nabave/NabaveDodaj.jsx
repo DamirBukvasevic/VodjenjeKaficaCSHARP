@@ -53,7 +53,7 @@ export default function NabaveDodaj(){
         <Form onSubmit={obradiSubmit}>
                 <Form.Group controlId="brojNabave">
                     <Form.Label>Broj nabave</Form.Label>
-                    <Form.Control type="text" name="brojNabave" required/>
+                    <Form.Control type="number" name="brojNabave" min={1} max={1000} required/>
                 </Form.Group>
             <hr />
                 <Form.Group controlId="datumNabave">

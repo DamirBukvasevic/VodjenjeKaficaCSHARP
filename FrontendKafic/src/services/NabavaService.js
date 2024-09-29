@@ -30,7 +30,7 @@ async function obrisi(sifra) {
 }
 
 async function dodaj(nabava) {
-    return await HttpService.post('/Nabava',nabava)
+    return await HttpService.post('/Nabava/',nabava)
     .then((odgovor)=>{
         return {greska: false, poruka: odgovor.data}
     })
@@ -41,7 +41,7 @@ async function dodaj(nabava) {
                 let poruke='';
                 for(const kljuc in e.response.data.errors)
                 {
-                    poruke+= kljuc +': ' + e.response.data.errors[kljuc][0] + '\n';
+                    poruke += kljuc + ': ' + e.response.data.errors[kljuc][0] + '\n';
                 }
                 return {greska: true, poruka: poruke}
             default:

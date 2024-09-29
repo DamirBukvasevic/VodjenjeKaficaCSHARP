@@ -73,3 +73,7 @@ insert into Artikli (NazivArtikla)values
 ('Cedevita naranca 19 g'),
 ('Cedevita limun 19 g'),
 ('Cedevita grejp 19 g');
+
+--select * from nabave;
+insert into Nabave (BrojNabave, DatumNabave, Dobavljac)values
+('1001','2024-09-29',1);

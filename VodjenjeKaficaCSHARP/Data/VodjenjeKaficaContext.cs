@@ -15,7 +15,7 @@ namespace VodjenjeKaficaCSHARP.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Nabava>().HasOne(d => d.Dobavljac);
+            modelBuilder.Entity<Nabava>().HasOne(n => n.Dobavljac);
         }
 
     }

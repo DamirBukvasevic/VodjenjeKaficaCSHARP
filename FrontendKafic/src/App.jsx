@@ -13,6 +13,7 @@ import DobavljaciDodaj from './pages/dobavljaci/DobavljaciDodaj'
 import DobavljaciPromjena from './pages/dobavljaci/DobavljaciPromjena'
 import NabavePregled from './pages/nabave/NabavePregled'
 import NabaveDodaj from './pages/nabave/NabaveDodaj'
+import NabavePromjena from './pages/nabave/NabavePromjena'
 
 
 function App() {
@@ -43,6 +44,7 @@ function App() {
 
           <Route path={RoutesNames.NABAVA_PREGLED} element={<NabavePregled />} />
           <Route path={RoutesNames.NABAVA_NOVI} element={<NabaveDodaj />} />
+          <Route path={RoutesNames.NABAVA_PROMJENA} element={<NabavePromjena />} />
         </Routes>
       </Container>
       <Container className='footer'>
