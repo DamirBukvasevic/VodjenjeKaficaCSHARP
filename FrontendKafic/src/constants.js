@@ -4,9 +4,12 @@ export const RoutesNames = {
     ARTIKL_PREGLED: '/artikli',
     ARTIKL_NOVI: '/artikli/dodaj',
     ARTIKL_PROMJENA: '/artikli/:sifra',
+    
     DOBAVLJAC_PREGLED: '/dobavljaci',
     DOBAVLJAC_NOVI: '/dobavljaci/dodaj',
     DOBAVLJAC_PROMJENA: '/dobavljaci/:sifra',
+
+    NABAVA_PREGLED: '/nabave',
     
 };
 

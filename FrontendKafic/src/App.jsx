@@ -11,6 +11,7 @@ import { Container } from 'react-bootstrap'
 import DobavljaciPregled from './pages/dobavljaci/DobavljaciPregled'
 import DobavljaciDodaj from './pages/dobavljaci/DobavljaciDodaj'
 import DobavljaciPromjena from './pages/dobavljaci/DobavljaciPromjena'
+import NabavePregled from './pages/nabave/NabavePregled'
 
 
 function App() {
@@ -21,12 +22,16 @@ function App() {
         <NavBarKafic />
         <Routes>
           <Route path={RoutesNames.HOME} element={<Pocetna />} />
+
           <Route path={RoutesNames.ARTIKL_PREGLED} element={<ArtikliPregled />} />
           <Route path={RoutesNames.ARTIKL_NOVI} element={<ArtikliDodaj />} />
           <Route path={RoutesNames.ARTIKL_PROMJENA} element={<ArtikliPromjena />} />
+
           <Route path={RoutesNames.DOBAVLJAC_PREGLED} element={<DobavljaciPregled />} />
           <Route path={RoutesNames.DOBAVLJAC_NOVI} element={<DobavljaciDodaj />} />
-          <Route path={RoutesNames.DOBAVLJAC_PROMJENA} element={< DobavljaciPromjena />} />
+          <Route path={RoutesNames.DOBAVLJAC_PROMJENA} element={<DobavljaciPromjena />} />
+
+          <Route path={RoutesNames.NABAVA_PREGLED} element={<NabavePregled />} />
         </Routes>
       </Container>
       <Container className='footer'>
