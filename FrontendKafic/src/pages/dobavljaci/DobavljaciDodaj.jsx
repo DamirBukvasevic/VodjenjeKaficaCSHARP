@@ -33,7 +33,7 @@ export default function DobavljaciDodaj(){
     return(
         <>
             <hr />
-                Unos novog dobavljaca
+                Unos novog dobavljača
             <hr />
             <Form onSubmit={obradiSubmit}>
                 <Form.Group controlId="naziv">
@@ -53,7 +53,7 @@ export default function DobavljaciDodaj(){
             <hr />
                 <Form.Group controlId="oib">
                     <Form.Label>OIB</Form.Label>
-                    <Form.Control type="number" min={1000000000} max={99999999999} name="oib" required />
+                    <Form.Control type="text" pattern="^\d{11}$" name="oib" required title="OIB mora sadržavati 11 znamenaka!" />
                 </Form.Group>
             <hr />
                 <Row>
