@@ -43,9 +43,11 @@ export default function NabavePregled(){
 
 
     return (
-
         <>
+            <div className="UnosDiv">
             <Link className="nabavaDodaj" to={RoutesNames.NABAVA_NOVI}>Unos nove nabave +</Link>
+            </div>
+            <div className="PregledDiv">
             <Table striped bordered hover responsive>
                 <thead className="naslovAPP">
                     <tr>
@@ -78,6 +80,7 @@ export default function NabavePregled(){
                     ))}
                 </tbody>
             </Table>
+            </div>
         </>
 
     );

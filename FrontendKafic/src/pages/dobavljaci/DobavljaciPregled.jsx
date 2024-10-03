@@ -38,7 +38,10 @@ export default function DobavljaciPregled(){
 
     return(
         <>
+            <div className="UnosDiv">
             <Link className="dobavljacDodaj" to={RoutesNames.DOBAVLJAC_NOVI}>Unos novog dobavljaca +</Link>
+            </div>
+            <div className="PregledDiv">
             <Table striped bordered hover responsive>
                 <thead className="naslovAPP">
                     <tr>
@@ -73,6 +76,7 @@ export default function DobavljaciPregled(){
                     ))}
                 </tbody>
             </Table>
+            </div>
         </>
     )
 }

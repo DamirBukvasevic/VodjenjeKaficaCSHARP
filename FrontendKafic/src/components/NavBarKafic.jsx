@@ -20,6 +20,7 @@ export default function NavBarKafic(){
               <Nav.Link onClick={()=>navigate(RoutesNames.DOBAVLJAC_PREGLED)}>Dobavljači</Nav.Link>
               <Nav.Link onClick={()=>navigate(RoutesNames.ARTIKL_PREGLED)}>Artikli</Nav.Link>
               <Nav.Link onClick={()=>navigate(RoutesNames.NABAVA_PREGLED)}>Nabave</Nav.Link>
+              <Nav.Link onClick={()=>navigate(RoutesNames.STAVKA_PREGLED)}>Stavke</Nav.Link>
               <Nav.Link className="swagger" href="https://damirbukva-001-site1.gtempurl.com/swagger/index.html" target="_blank">Swagger</Nav.Link> 
             </Nav>
           </Navbar.Collapse>

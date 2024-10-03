@@ -38,7 +38,10 @@ export default function ArtikliPregled(){
 
     return(
         <>
+            <div className="UnosDiv">
             <Link className="artiklDodaj" to={RoutesNames.ARTIKL_NOVI} >Unos novog artikla  +</Link>
+            </div>
+            <div className="PregledDiv">
             <Table striped bordered hover responsive>
                 <thead className="naslovAPP">
                     <tr>
@@ -67,6 +70,7 @@ export default function ArtikliPregled(){
                     ))}
                 </tbody>
             </Table>
+            </div>
         </>
     )
 }

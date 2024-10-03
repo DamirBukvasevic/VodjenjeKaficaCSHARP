@@ -48,7 +48,7 @@ export default function NabaveDodaj(){
     return (
         <>
         <hr />
-        Dodavanje nove nabave
+            Unos nove nabave
         <hr />
         <Form onSubmit={obradiSubmit}>
                 <Form.Group controlId="brojNabave">
