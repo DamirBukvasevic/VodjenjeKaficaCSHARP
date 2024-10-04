@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { RoutesNames } from "../../constants";
 import moment from "moment";
 import { Button, Col, Form, Row } from "react-bootstrap";
+import ArtiklService from "../../services/ArtiklService";
 
 
 export default function NabavePromjena(){
@@ -13,6 +14,8 @@ export default function NabavePromjena(){
 
     const [dobavljaci, setDobavljaci] = useState([]);
     const [dobavljacSifra, setDobavljacSifra] = useState(0);
+    const [artikli, setArtikli] = useState([]);
+    const [pronadeniArtikli, setPronadeniArtikli] = useState([]);
 
     const [nabava, setNabava] = useState({});
 
@@ -32,9 +35,46 @@ export default function NabavePromjena(){
         setDobavljacSifra(nabava.dobavljacSifra);
     }
 
+    async function dohvatiArtikli(){
+        const odgovor = await Service.getArtikli(routeParams.sifra);
+        if(odgovor.greska){
+            alert(odgovor.poruka);
+            return;
+        }
+        setArtikli(odgovor.poruka);
+    }
+
+    async function traziArtikl(uvjet) {
+        const odgovor = await ArtiklService.traziArtikl(uvjet);
+        if(odgovor.greska){
+            alert(odgovor.poruka);
+            return;
+        }
+        setPronadeniArtikli(odgovor.poruka);
+    }
+
+    async function dodajArtikle(e) {
+        const odgovor = await Service.dodajArtikl(routeParams.sifra, e[0].sifra);
+        if(odgovor.greska){
+            alert(odgovor.podaci);
+            return;
+        }
+        await dohvatiArtikli();
+    }
+
+    async function obrisiArtikl(artikl) {
+        const odgovor = await Service.obrisiArtikl(routeParams.sifra, artikl);
+        if(odgovor.greska){
+            alert(odgovor.podaci);
+            return;
+        }
+        await dohvatiArtikli();
+    }
+
     async function dohvatiInicijalnePodatke(){
         await dohvatiDobavljace();
         await dohvatiNabava();
+        await dohvatiArtikli();
     }
 
     useEffect(()=>{
