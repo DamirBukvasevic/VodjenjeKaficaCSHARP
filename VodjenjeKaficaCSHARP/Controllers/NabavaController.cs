@@ -174,5 +174,30 @@ namespace VodjenjeKaficaCSHARP.Controllers
                 return BadRequest(new { poruka = ex.Message });
             }
         }
+
+        [HttpGet]
+        [Route("Artikli/{sifraNabave:int}")]
+        public ActionResult<List<ArtiklDTORead>> getArtikli(int sifraNabave)
+        {
+            if (!ModelState.IsValid || sifraNabave <= 0)
+            {
+                return BadRequest(ModelState);
+            }
+            try
+            {
+                var n = _context.Nabave
+                    .Include(i => i.Artikli).FirstOrDefault(x => x.Sifra == sifraNabave);
+                if (n == null)
+                {
+                    return BadRequest("Ne postoji nabava s šifrom " + sifraNabave + " u bazi");
+                }
+
+                return Ok(_mapper.Map<List<ArtiklDTORead>>(n.Artikli));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { poruka = ex.Message });
+            }
+        }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System.Text.RegularExpressions;
 using VodjenjeKaficaCSHARP.Models;
 
 namespace VodjenjeKaficaCSHARP.Data
@@ -20,10 +19,10 @@ namespace VodjenjeKaficaCSHARP.Data
             modelBuilder.Entity<Nabava>().HasOne(n => n.Dobavljac);
 
             modelBuilder.Entity<Nabava>()
-                .HasMany(a => a.Artikli)
-                .WithMany(n => n.Nabave)
+                .HasMany(n => n.Artikli)
+                .WithMany(a => a.Nabave)
                 .UsingEntity<Dictionary<string, object>>("stavke",
-                c => c.HasOne<Artikl>().WithMany().HasForeignKey("artikli"),
+                c => c.HasOne<Artikl>().WithMany().HasForeignKey("artikl"),
                 c => c.HasOne<Nabava>().WithMany().HasForeignKey("nabava"),
                 c => c.ToTable("stavke")
                 );

@@ -70,10 +70,20 @@ async function promjena(sifra,artikl) {
     })
 }
 
+async function traziArtikl(uvjet){
+    return await HttpService.get('/Artikl/trazi/'+uvjet)
+    .then((odgovor)=>{
+        return {greska: false, poruka: odgovor.data}
+    })
+    .catch((e)=>{return {greska: true, poruka: 'Problem kod traženja artikla'}})
+}
+
 export default{
     get,
     getBySifra,
     obrisi,
     dodaj,
-    promjena
+    promjena,
+
+    traziArtikl
 }
