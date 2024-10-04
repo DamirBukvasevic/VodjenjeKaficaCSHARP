@@ -14,8 +14,6 @@ import DobavljaciPromjena from './pages/dobavljaci/DobavljaciPromjena'
 import NabavePregled from './pages/nabave/NabavePregled'
 import NabaveDodaj from './pages/nabave/NabaveDodaj'
 import NabavePromjena from './pages/nabave/NabavePromjena'
-import StavkePregled from './pages/stavke/StavkePregled'
-import StavkeDodaj from './pages/stavke/StavkeDodaj'
 
 
 function App() {
@@ -47,9 +45,6 @@ function App() {
           <Route path={RoutesNames.NABAVA_PREGLED} element={<NabavePregled />} />
           <Route path={RoutesNames.NABAVA_NOVI} element={<NabaveDodaj />} />
           <Route path={RoutesNames.NABAVA_PROMJENA} element={<NabavePromjena />} />
-
-          <Route path={RoutesNames.STAVKA_PREGLED} element={<StavkePregled/>} />
-          <Route path={RoutesNames.STAVKA_NOVI} element={<StavkeDodaj />} />
         </Routes>
       </Container>
       <Container className='footer'>

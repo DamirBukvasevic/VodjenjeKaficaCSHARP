@@ -1,12 +1,12 @@
 
 SELECT name, collation_name FROM sys.databases;
 GO
-ALTER DATABASE db_aacea2_edunovawp4_admin SET SINGLE_USER WITH
+ALTER DATABASE db_aacea2_edunovawp4 SET SINGLE_USER WITH
 ROLLBACK IMMEDIATE;
 GO
-ALTER DATABASE db_aacea2_edunovawp4_admin COLLATE Croatian_CI_AS;
+ALTER DATABASE db_aacea2_edunovawp4 COLLATE Croatian_CI_AS;
 GO
-ALTER DATABASE db_aacea2_edunovawp4_admin SET MULTI_USER;
+ALTER DATABASE db_aacea2_edunovawp4 SET MULTI_USER;
 GO
 SELECT name, collation_name FROM sys.databases;
 GO
@@ -40,6 +40,7 @@ Dobavljac int not null
 
 
 create table Stavke(
+Sifra int not null primary key identity(1,1),
 SifraNabave int not null,
 SifraArtikla int not null,
 KolicinaArtikla int not null,

@@ -12,10 +12,6 @@ export const RoutesNames = {
     NABAVA_PREGLED: '/nabave',
     NABAVA_NOVI: '/nabave/dodaj',
     NABAVA_PROMJENA: '/nabave/:sifra',
-
-    STAVKA_PREGLED: '/stavke',
-    STAVKA_NOVI: '/stavke/dodaj',
-    STAVKA_PROMJENA: '/stavke/:sifra'
 };
 
 export const BACKEND_URL = 'https://damirbukva-001-site1.gtempurl.com/api/v1';
