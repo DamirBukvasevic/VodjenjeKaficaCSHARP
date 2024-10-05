@@ -10,6 +10,6 @@ namespace VodjenjeKaficaCSHARP.Models
         [ForeignKey("dobavljac")]
         public required Dobavljac Dobavljac { get; set; }
 
-        public ICollection<Artikl>? Artikli { get; set; }
+        public ICollection<Stavka>? Stavke { get; set; }
     }
 }

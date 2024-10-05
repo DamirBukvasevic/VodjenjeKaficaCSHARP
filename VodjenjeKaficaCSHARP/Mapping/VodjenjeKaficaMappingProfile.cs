@@ -25,7 +25,16 @@ namespace VodjenjeKaficaCSHARP.Mapping
                 opt => opt.MapFrom(src => src.Dobavljac.Sifra)
                 );
             CreateMap<NabavaDTOInsertUpdate, Nabava>();
-                
+            /*
+            CreateMap<Stavka, StavkaDTORead>().ForCtorParam("ArtiklaNaziv",
+                opt => opt.MapFrom(src => src.Artikl.NazivArtikla)
+                ).ForCtorParam("SifraNabave",
+                opt => opt.MapFrom(src => src.Nabava.Sifra)
+                );
+            */
+            CreateMap<Stavka, StavkaDTORead>().ConstructUsing(e => 
+               new StavkaDTORead(e.Sifra,e.Artikl.NazivArtikla,e.KolicinaArtikla, e.Cijena)
+            );
         }
 
     }

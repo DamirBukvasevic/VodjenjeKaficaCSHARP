@@ -144,5 +144,31 @@ namespace VodjenjeKaficaCSHARP.Controllers
                 return BadRequest(new { poruka = ex.Message });
             }
         }
+
+        [HttpGet]
+        [Route("trazi/{uvjet}")]
+        public ActionResult<List<ArtiklDTORead>> TraziArtikl(string uvjet)
+        {
+            if (uvjet == null || uvjet.Length < 3)
+            {
+                return BadRequest(ModelState);
+            }
+            uvjet = uvjet.ToLower();
+            try
+            {
+                IEnumerable<Artikl> query = _context.Artikli;
+                var niz = uvjet.Split(" ");
+                foreach (var s in uvjet.Split(" "))
+                {
+                    query = query.Where(p => p.NazivArtikla.ToLower().Contains(s));
+                }
+                var artikli = query.ToList();
+                return Ok(_mapper.Map<List<ArtiklDTORead>>(artikli));
+            }
+            catch (Exception e)
+            {
+                return BadRequest(new { poruka = e.Message });
+            }
+        }
     }
 }

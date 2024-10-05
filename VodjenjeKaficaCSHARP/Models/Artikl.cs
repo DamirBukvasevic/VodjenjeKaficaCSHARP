@@ -6,6 +6,6 @@ namespace VodjenjeKaficaCSHARP.Models
     {
         public string? NazivArtikla { get; set; }
 
-        public ICollection<Nabava>? Nabave { get; } = [];
+        public ICollection<Stavka>? Stavke { get; } = [];
     }
 }

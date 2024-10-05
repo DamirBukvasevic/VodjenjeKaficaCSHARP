@@ -2,8 +2,7 @@
 {
     public record StavkaDTORead(
         int Sifra,
-        int? SifraNabave,
-        int? SifraArtikla,
+        string? ArtiklaNaziv,
         int? KolicinaArtikla,
         decimal? Cijena
     );

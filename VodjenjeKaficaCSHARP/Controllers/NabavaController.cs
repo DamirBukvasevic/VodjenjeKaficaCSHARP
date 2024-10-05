@@ -177,7 +177,7 @@ namespace VodjenjeKaficaCSHARP.Controllers
 
         [HttpGet]
         [Route("Artikli/{sifraNabave:int}")]
-        public ActionResult<List<ArtiklDTORead>> getArtikli(int sifraNabave)
+        public ActionResult<List<StavkaDTORead>> getArtikli(int sifraNabave)
         {
             if (!ModelState.IsValid || sifraNabave <= 0)
             {
@@ -186,17 +186,58 @@ namespace VodjenjeKaficaCSHARP.Controllers
             try
             {
                 var n = _context.Nabave
-                    .Include(i => i.Artikli).FirstOrDefault(x => x.Sifra == sifraNabave);
+                    .Include(i => i.Stavke).ThenInclude(i=>i.Artikl).FirstOrDefault(x => x.Sifra == sifraNabave);
                 if (n == null)
                 {
                     return BadRequest("Ne postoji nabava s šifrom " + sifraNabave + " u bazi");
                 }
 
-                return Ok(_mapper.Map<List<ArtiklDTORead>>(n.Artikli));
+                return Ok(_mapper.Map<List<StavkaDTORead>>(n.Stavke));
             }
             catch (Exception ex)
             {
                 return BadRequest(new { poruka = ex.Message });
+            }
+        }
+        [HttpPost]
+        [Route("{sifra:int}/dodaj/{polaznikSifra:int}")]
+        public IActionResult DodajPolaznika(int sifra, int artiklSifra)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            if (sifra <= 0 || artiklSifra <= 0)
+            {
+                return BadRequest("Šifra grupe ili polaznika nije dobra");
+            }
+            try
+            {
+                var nabava = _context.Nabave
+                    .Include(g => g.Stavke)
+                    .FirstOrDefault(g => g.Sifra == sifra);
+                if (nabava == null)
+                {
+                    return BadRequest("Ne postoji nabava s šifrom " + sifra + " u bazi");
+                }
+                var artikl = _context.Stavke.Find(artiklSifra);
+                if (artikl == null)
+                {
+                    return BadRequest("Ne postoji artikl s šifrom " + artiklSifra + " u bazi");
+                }
+                nabava.Stavke.Add(artikl);
+                _context.Nabave.Update(nabava);
+                _context.SaveChanges();
+                return Ok(new
+                {
+                    poruka = "Artikl " + nabava.BrojNabave + " dodan na nabavu "
+                });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(
+                       StatusCodes.Status503ServiceUnavailable,
+                       ex.Message);
             }
         }
     }

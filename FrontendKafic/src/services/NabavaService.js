@@ -72,7 +72,7 @@ async function promjena(sifra,nabava) {
 async function getArtikli(sifra){
     return await HttpService.get('/Nabava/Artikli/'+ sifra)
     .then((odgovor)=>{
-        //console.table(odgovor.data);
+        console.table(odgovor.data);
         return {greska: false, poruka: odgovor.data}
     })
     .catch((e)=>{return {greska: true, poruka: 'Problem kod dohvaćanja artikla'}})

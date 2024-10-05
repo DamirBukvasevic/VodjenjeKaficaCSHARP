@@ -5,8 +5,8 @@ import { useEffect, useRef, useState } from "react";
 import { RoutesNames } from "../../constants";
 import moment from "moment";
 import { Button, Col, Container, Form, Row, Table } from "react-bootstrap";
-import ArtiklService from "../../services/ArtiklService";
 import { AsyncTypeahead } from "react-bootstrap-typeahead";
+import ArtiklService from "../../services/ArtiklService";
 
 
 export default function NabavePromjena(){
@@ -34,6 +34,7 @@ export default function NabavePromjena(){
             return;
         }
         let nabava = odgovor.poruka;
+        odgovor.poruka.datumNabave = moment.utc(odgovor.poruka.datumNabave).format('yyyy-MM-DD');
         setNabava(nabava);
         setDobavljacSifra(nabava.dobavljacSifra);
     }
@@ -163,7 +164,7 @@ export default function NabavePromjena(){
                         id='uvjet'
                         emptyLabel='Nema rezultata'
                         searchText='Tražim...'
-                        labelKey={(artikl) => `${artikl.naziv}`}
+                        labelKey={(artikl) => `${artikl.nazivArtikla}`}
                         minLength={3}
                         options={pronadeniArtikli}
                         onSearch={traziArtikl}
@@ -171,7 +172,7 @@ export default function NabavePromjena(){
                         renderMenuItemChildren={(artikl) => (
                             <>
                                 <span>
-                                    {artikl.naziv}
+                                    {artikl.nazivArtikla}
                                 </span>
                             </>
                         )}
@@ -190,7 +191,7 @@ export default function NabavePromjena(){
                             {artikli && artikli.map((artikl, index) => (
                                 <tr key={index}>
                                     <td>
-                                        {artikl.naziv}
+                                        {artikl.artiklaNaziv}
                                     </td>
                                     <td>
                                         <Button variant="danger" onClick={() =>

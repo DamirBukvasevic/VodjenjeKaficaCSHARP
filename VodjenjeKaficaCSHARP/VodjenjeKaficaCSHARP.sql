@@ -75,3 +75,7 @@ insert into Artikli (NazivArtikla)values
 ('Cedevita naranca 19 g'),
 ('Cedevita limun 19 g'),
 ('Cedevita grejp 19 g');
+
+--select * from stavke;
+insert into Stavke (SifraNabave, SifraArtikla, KolicinaArtikla, Cijena)values
+(1,2,24,1.25)
