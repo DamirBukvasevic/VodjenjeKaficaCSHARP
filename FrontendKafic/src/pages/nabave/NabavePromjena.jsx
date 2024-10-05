@@ -60,7 +60,7 @@ export default function NabavePromjena(){
     async function dodajArtikl(e) {
         const odgovor = await Service.dodajArtikl(routeParams.sifra, e[0].sifra);
         if(odgovor.greska){
-            alert(odgovor.podaci);
+            alert(odgovor.poruka);
             return;
         }
         await dohvatiArtikli();

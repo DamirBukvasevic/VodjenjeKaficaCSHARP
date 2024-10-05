@@ -200,37 +200,41 @@ namespace VodjenjeKaficaCSHARP.Controllers
             }
         }
         [HttpPost]
-        [Route("{sifra:int}/dodaj/{polaznikSifra:int}")]
-        public IActionResult DodajPolaznika(int sifra, int artiklSifra)
+        [Route("/dodajArtikl")]
+        public IActionResult DodajPolaznika(StavkaDTOInsertUpdate dto)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            if (sifra <= 0 || artiklSifra <= 0)
+            if (dto.SifraNabave <= 0 || dto.SifraArtikla <= 0)
             {
-                return BadRequest("Šifra grupe ili polaznika nije dobra");
+                return BadRequest(new { poruka = "Šifra nabave ili artikl nije dobra" });
             }
             try
             {
                 var nabava = _context.Nabave
                     .Include(g => g.Stavke)
-                    .FirstOrDefault(g => g.Sifra == sifra);
+                    .FirstOrDefault(g => g.Sifra == dto.SifraNabave);
                 if (nabava == null)
                 {
-                    return BadRequest("Ne postoji nabava s šifrom " + sifra + " u bazi");
+                    return BadRequest(new { poruka = "Ne postoji nabava s šifrom " + dto.SifraNabave + " u bazi" });
                 }
-                var artikl = _context.Stavke.Find(artiklSifra);
+                var artikl = _context.Artikli.Find(dto.SifraArtikla);
                 if (artikl == null)
                 {
-                    return BadRequest("Ne postoji artikl s šifrom " + artiklSifra + " u bazi");
+                    return BadRequest(new { poruka = "Ne postoji artikl s šifrom " + dto.SifraArtikla + " u bazi" });
                 }
-                nabava.Stavke.Add(artikl);
+
+
+                var stavka = new Stavka() {Nabava = nabava, Artikl = artikl, Cijena = dto.Cijena, KolicinaArtikla = dto.KolicinaArtikla };
+
+                nabava.Stavke.Add(stavka);
                 _context.Nabave.Update(nabava);
                 _context.SaveChanges();
                 return Ok(new
                 {
-                    poruka = "Artikl " + nabava.BrojNabave + " dodan na nabavu "
+                    poruka = "Artikl " + artikl.Sifra + " dodan na nabavu "
                 });
             }
             catch (Exception ex)
