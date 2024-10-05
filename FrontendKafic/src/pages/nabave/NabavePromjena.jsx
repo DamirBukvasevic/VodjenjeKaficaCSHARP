@@ -4,7 +4,7 @@ import DobavljacService from "../../services/DobavljacService";
 import { useEffect, useRef, useState } from "react";
 import { RoutesNames } from "../../constants";
 import moment from "moment";
-import { Button, Col, Container, Form, Row, Table } from "react-bootstrap";
+import { Button, Col, Form, Row, Table } from "react-bootstrap";
 import { AsyncTypeahead } from "react-bootstrap-typeahead";
 import ArtiklService from "../../services/ArtiklService";
 
@@ -103,14 +103,25 @@ export default function NabavePromjena(){
         promjena({
             brojNabave: podaci.get('brojNabave'),
             datumNabave: moment.utc(podaci.get('datumNabave')),
-            dobavljacSifra: parseInt(dobavljacSifra)
+            dobavljacSifra: parseInt(dobavljacSifra),
+        });
+    }
+
+    function obradiSubmit2(e){
+        e.preventDefault();
+
+        const podaci = new FormData(e.target);
+
+        dodajArtikl({
+            sifraArtikla: podaci.get('uvjet'),
+            kolicinaArtikla: podaci.get('kolicinaArtikla'),
+            cijena: parseFloat(podaci.get('cijena')),
         });
     }
 
     return(
         <>
-            <Col key='1' sm={12} lg={6} md={6}>
-                <hr />
+            <div className="Col-6-lijevo">
                 Promjena podataka nabave
                 <hr />
                 <Form onSubmit={obradiSubmit}>
@@ -152,59 +163,96 @@ export default function NabavePromjena(){
                         </Col>
                     </Row>
                 </Form>
-            </Col>
-            <Col key='2' sm={12} lg={6} md={6}>
-                <div style={{overflow: 'auto', maxHeight:'400px'}}>
-                    <Form.Group controlId="uvjet">
-                        <hr />
-                        <Form.Label>Traži artikl</Form.Label>
-                        <hr />
-                        <AsyncTypeahead
-                        className='autocomplete'
-                        id='uvjet'
-                        emptyLabel='Nema rezultata'
-                        searchText='Tražim...'
-                        labelKey={(artikl) => `${artikl.nazivArtikla}`}
-                        minLength={3}
-                        options={pronadeniArtikli}
-                        onSearch={traziArtikl}
-                        placeholder='Upiši dio naziva artikla'
-                        renderMenuItemChildren={(artikl) => (
-                            <>
-                                <span>
-                                    {artikl.nazivArtikla}
-                                </span>
-                            </>
-                        )}
-                        onChange={dodajArtikl}
-                        ref={typeaheadRef}
-                        />
-                    </Form.Group>
-                    <Table striped bordered hover>
-                        <thead>
-                            <tr>
-                                <th>Artikli u nabavi</th>
-                                <th>Akcija</th>
+            </div>
+            <div className="Col-6-lijevo">
+                Unos stavki nabave
+                <hr />
+                <Form onSubmit={obradiSubmit2}>
+                <Form.Group controlId="uvjet">
+                    <Form.Label>Traži artikl</Form.Label>
+                    <AsyncTypeahead
+                    className='autocomplete'
+                    id='uvjet'
+                    emptyLabel='Nema rezultata'
+                    searchText='Tražim...'
+                    labelKey={(artikl) => `${artikl.nazivArtikla}`}
+                    minLength={3}
+                    options={pronadeniArtikli}
+                    onSearch={traziArtikl}
+                    placeholder='Upiši dio naziva artikla'
+                    renderMenuItemChildren={(artikl) => (
+                        <>
+                        <span>
+                            {artikl.nazivArtikla}
+                        </span>
+                        </>
+                    )}
+                    
+                    />
+                </Form.Group>
+                <hr />
+                <Form.Group controlId="kolocinaArtikla">
+                    <Form.Label>Količina artikla</Form.Label>
+                    <Form.Control type="number" name="kolicinaArtikla" min={1} max={1000}
+                    required defaultValue={nabava.kolicinaArtikla}/>
+                </Form.Group>
+                <hr />
+                <Form.Group controlId="kolocinaArtikla">
+                    <Form.Label>Cijena</Form.Label>
+                    <Form.Control type="number" name="cijena" step={0.01}
+                    required defaultValue={nabava.cijena}/>
+                </Form.Group>
+                <hr />
+                <Row>
+                    <Col xs={6} sm={6} md={3} lg={6} xl={6} xxl={6}>
+                    <Link to={RoutesNames.NABAVA_PREGLED}
+                        className="btn btn-danger siroko">
+                        Odustani
+                    </Link>
+                    </Col>
+                    <Col xs={6} sm={6} md={9} lg={6} xl={6} xxl={6}>
+                    <Button variant="primary" type="submit" className="siroko">
+                        Dodaj stavku nabave
+                    </Button>
+                    </Col>
+                </Row>
+                </Form>
+                <hr />
+                <Table striped bordered hover>
+                    <thead className="stavka">
+                        <tr>
+                            <th>Artikli u nabavi</th>
+                            <th>Količina</th>
+                            <th>Cijena</th>
+                            <th>Akcija</th>
+                        </tr>
+                    </thead>
+                    <tbody className="stavka">
+                        {artikli && artikli.map((artikl, index) => (
+                            <tr key={index}>
+                                <td>
+                                    {artikl.artiklaNaziv}
+                                </td>
+                                <td>
+                                    {artikl.kolicinaArtikla}
+                                    &nbsp;&nbsp;&nbsp;Kom
+                                </td>
+                                <td>
+                                    {artikl.cijena}
+                                    &nbsp;&nbsp;&nbsp;€
+                                </td>
+                                <td>
+                                    <Button className="siroko" variant="danger" onClick={() =>
+                                        obrisiArtikl(artikl)
+                                    }>
+                                        Obriši
+                                    </Button>
+                                </td>
                             </tr>
-                        </thead>
-                        <tbody>
-                            {artikli && artikli.map((artikl, index) => (
-                                <tr key={index}>
-                                    <td>
-                                        {artikl.artiklaNaziv}
-                                    </td>
-                                    <td>
-                                        <Button variant="danger" onClick={() =>
-                                            obrisiArtikl(artikl.sifra)
-                                        }>
-                                        </Button>
-                                    </td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </Table>
-                </div>
-            </Col>
+                        ))}
+                    </tbody>
+                </Table>
+            </div>
         </>
     );
 }

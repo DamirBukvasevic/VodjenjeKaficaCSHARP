@@ -186,7 +186,7 @@ namespace VodjenjeKaficaCSHARP.Controllers
             try
             {
                 var n = _context.Nabave
-                    .Include(i => i.Stavke).ThenInclude(i=>i.Artikl).FirstOrDefault(x => x.Sifra == sifraNabave);
+                .Include(i => i.Stavke).ThenInclude(i=>i.Artikl).FirstOrDefault(x => x.Sifra == sifraNabave);
                 if (n == null)
                 {
                     return BadRequest("Ne postoji nabava s šifrom " + sifraNabave + " u bazi");
@@ -201,7 +201,7 @@ namespace VodjenjeKaficaCSHARP.Controllers
         }
         [HttpPost]
         [Route("/dodajArtikl")]
-        public IActionResult DodajPolaznika(StavkaDTOInsertUpdate dto)
+        public IActionResult DodajArtikl(StavkaDTOInsertUpdate dto)
         {
             if (!ModelState.IsValid)
             {
@@ -234,7 +234,7 @@ namespace VodjenjeKaficaCSHARP.Controllers
                 _context.SaveChanges();
                 return Ok(new
                 {
-                    poruka = "Artikl " + artikl.Sifra + " dodan na nabavu "
+                    poruka = "Artikl " + artikl.Sifra + "Artikl dodan na nabavu "
                 });
             }
             catch (Exception ex)
@@ -242,6 +242,50 @@ namespace VodjenjeKaficaCSHARP.Controllers
                 return StatusCode(
                        StatusCodes.Status503ServiceUnavailable,
                        ex.Message);
+            }
+        }
+
+        [HttpDelete]
+        [Route("/obrisiArtikl")]
+        public IActionResult ObrisiArtikl(StavkaDTOInsertUpdate dto)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            if (dto.SifraNabave <= 0 || dto.SifraArtikla <= 0)
+            {
+                return BadRequest(new { poruka = "Šifra nabave ili artikl nije dobra" });
+            }
+            try
+            {
+                var nabava = _context.Nabave
+                    .Include(g => g.Stavke)
+                    .FirstOrDefault(g => g.Sifra == dto.SifraNabave);
+                if (nabava == null)
+                {
+                    return BadRequest(new { poruka = "Ne postoji nabava s šifrom " + dto.SifraNabave + " u bazi" });
+                }
+                var artikl = _context.Artikli.Find(dto.SifraArtikla);
+                if (artikl == null)
+                {
+                    return BadRequest(new { poruka = "Ne postoji artikl s šifrom " + dto.SifraArtikla + " u bazi" });
+                }
+
+
+                var stavka = new Stavka() {Nabava = nabava, Artikl = artikl, Cijena = dto.Cijena, KolicinaArtikla = dto.KolicinaArtikla };
+
+                nabava.Stavke.Remove(stavka);
+                _context.Nabave.Update(nabava);
+                _context.SaveChanges();
+                return Ok(new
+                {
+                    poruka = "Artikl " + artikl.Sifra + " Artikl obrisan iz nabave "
+                });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { poruka = ex.Message });
             }
         }
     }
