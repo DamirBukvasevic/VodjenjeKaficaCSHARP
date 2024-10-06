@@ -4,6 +4,7 @@ import { RoutesNames } from "../../constants";
 import DobavljacService from "../../services/DobavljacService";
 import { useEffect, useState } from "react";
 
+import useLoading from "../../hooks/useLoading";
 
 
 export default function DobavljaciPromjena(){
@@ -12,8 +13,12 @@ export default function DobavljaciPromjena(){
     const routeParams = useParams();
     const [dobavljac,setDobavljac] = useState({});
 
+    const { showLoading, hideLoading } = useLoading();
+
     async function dohvatiDobavljaca(){
+        showLoading();
         const odgovor = await DobavljacService.getBySifra(routeParams.sifra);
+        hideLoading();
         if(odgovor.greska){
             alert(odgovor.poruka);
             return;
@@ -26,7 +31,9 @@ export default function DobavljaciPromjena(){
     },[]);
 
     async function promjena(dobavljac){
+        showLoading();
         const odgovor = await DobavljacService.promjena(routeParams.sifra,dobavljac);
+        hideLoading();
         if(odgovor.greska){
             alert(odgovor.poruka);
             return;

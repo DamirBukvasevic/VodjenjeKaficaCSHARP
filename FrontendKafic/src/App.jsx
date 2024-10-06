@@ -15,6 +15,8 @@ import NabavePregled from './pages/nabave/NabavePregled'
 import NabaveDodaj from './pages/nabave/NabaveDodaj'
 import NabavePromjena from './pages/nabave/NabavePromjena'
 
+import LoadingSpinner from './components/LoadingSpinner'
+
 
 function App() {
 
@@ -29,6 +31,7 @@ function App() {
 
   return (
     <>
+      <LoadingSpinner />
       <Container className='visina'>
         <NavBarKafic />
         <Routes>

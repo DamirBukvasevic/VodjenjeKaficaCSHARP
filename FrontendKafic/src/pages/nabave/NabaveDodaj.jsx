@@ -6,18 +6,22 @@ import { RoutesNames } from "../../constants";
 import moment from "moment";
 import { Button, Col, Form, Row } from "react-bootstrap";
 
+import useLoading from "../../hooks/useLoading";
 
 
 export default function NabaveDodaj(){
     const navigate =useNavigate();
+    const { showLoading, hideLoading } = useLoading();
 
     const [dobavljaci, setDobavljaci] = useState([]);
     const [dobavljacSifra, setDobavljacSifra] = useState(0);
 
     async function dohvatiDobavljace(){
+        showLoading();
         const odgovor = await DobavljacService.get();
         setDobavljaci(odgovor);
         setDobavljacSifra(odgovor[0].sifra);
+        hideLoading();
     }
 
     useEffect(()=>{
@@ -25,7 +29,9 @@ export default function NabaveDodaj(){
     },[]);
 
     async function dodaj(e) {
+        showLoading();
         const odgovor = await Service.dodaj(e);
+        hideLoading();
         if(odgovor.greska){
             alert(odgovor.poruka);
             return;

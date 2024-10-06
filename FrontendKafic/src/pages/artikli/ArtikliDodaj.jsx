@@ -3,13 +3,19 @@ import { Link, useNavigate } from "react-router-dom";
 import { RoutesNames } from "../../constants";
 import ArtiklService from "../../services/ArtiklService";
 
+import useLoading from "../../hooks/useLoading";
+
 
 export default function ArtikliDodaj(){
 
     const navigate = useNavigate();
+    
+    const { showLoading, hideLoading } = useLoading();
 
     async function dodaj(artikl){
+        showLoading();
         const odgovor = await ArtiklService.dodaj(artikl);
+        hideLoading();
         if(odgovor.greska){
             alert(odgovor.poruka);
             return;

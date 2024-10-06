@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { RoutesNames } from "../../constants";
 
+import useLoading from "../../hooks/useLoading";
+
 
 export default function ArtikliPregled(){
 
@@ -11,12 +13,16 @@ export default function ArtikliPregled(){
 
     const navigate = useNavigate();
 
+    const { showLoading, hideLoading } = useLoading();
+
     async function dohvatiArtikle() {
+        showLoading();
         await ArtiklService.get()
         .then((odgovor)=>{
             setArtikli(odgovor);
         })
         .catch((e)=>console.log(e));
+        hideLoading();
     }
 
     useEffect(()=>{
@@ -24,7 +30,9 @@ export default function ArtikliPregled(){
     },[]);
 
     async function obrisiAsync(sifra) {
+        showLoading();
         const odgovor = await ArtiklService.obrisi(sifra);
+        hideLoading();
         if(odgovor.greska){
             alert(odgovor.poruka);
             return;

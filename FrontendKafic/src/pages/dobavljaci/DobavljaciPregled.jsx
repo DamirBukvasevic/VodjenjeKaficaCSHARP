@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { RoutesNames } from "../../constants";
 
+import useLoading from "../../hooks/useLoading";
+
 
 export default function DobavljaciPregled(){
 
@@ -11,12 +13,16 @@ export default function DobavljaciPregled(){
 
     const navigate = useNavigate();
 
+    const { showLoading, hideLoading } = useLoading();
+
     async function dohvatiDobavljace() {
+        showLoading();
         await DobavljacService.get()
         .then((odgovor)=>{
             setDobavljaci(odgovor);
         })
         .catch((e)=>console.error(e));
+        hideLoading();
     }
 
     useEffect(()=>{
@@ -24,7 +30,9 @@ export default function DobavljaciPregled(){
     },[]);
 
     async function obrisiAsync(sifra) {
+        showLoading();
         const odgovor = await DobavljacService.obrisi(sifra);
+        hideLoading();
         if(odgovor.greska){
             alert(odgovor.poruka);
             return;

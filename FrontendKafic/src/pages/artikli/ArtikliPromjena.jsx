@@ -4,6 +4,8 @@ import { RoutesNames } from "../../constants";
 import ArtiklService from "../../services/ArtiklService";
 import { useEffect, useState } from "react";
 
+import useLoading from "../../hooks/useLoading";
+
 
 export default function ArtikliPromjena(){
 
@@ -11,8 +13,12 @@ export default function ArtikliPromjena(){
     const routeParams = useParams();
     const [artikl,setArtikl] = useState({});
 
+    const { showLoading, hideLoading } = useLoading();
+
     async function dohvatiArtikl(){
+        showLoading();
         const odgovor = await ArtiklService.getBySifra(routeParams.sifra);
+        hideLoading();
         if(odgovor.greska){
             alert(odgovor.poruka);
             return;
@@ -25,7 +31,9 @@ export default function ArtikliPromjena(){
     },[]);
 
     async function promjena(artikl){
+        showLoading();
         const odgovor = await ArtiklService.promjena(routeParams.sifra,artikl);
+        hideLoading();
         if(odgovor.greska){
             alert(odgovor.poruka);
             return;

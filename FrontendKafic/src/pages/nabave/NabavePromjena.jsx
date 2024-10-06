@@ -8,10 +8,14 @@ import { Button, Col, Form, Row, Table } from "react-bootstrap";
 import { AsyncTypeahead } from "react-bootstrap-typeahead";
 import ArtiklService from "../../services/ArtiklService";
 
+import useLoading from "../../hooks/useLoading";
+
 
 export default function NabavePromjena(){
     const navigate = useNavigate();
     const routeParams = useParams();
+
+    const { showLoading, hideLoading } = useLoading();
 
     const [dobavljaci, setDobavljaci] = useState([]);
     const [dobavljacSifra, setDobavljacSifra] = useState(0);
@@ -58,6 +62,7 @@ export default function NabavePromjena(){
     }
 
     async function dodajArtikl(e) {
+        showLoading();
         const odgovor = await Service.dodajArtikl(routeParams.sifra, e[0].sifra);
         if(odgovor.greska){
             alert(odgovor.poruka);
@@ -65,10 +70,13 @@ export default function NabavePromjena(){
         }
         await dohvatiArtikli();
         typeaheadRef.current.clear();
+        hideLoading();
     }
 
     async function obrisiArtikl(artikl) {
+        showLoading();
         const odgovor = await Service.obrisiArtikl(routeParams.sifra, artikl);
+        hideLoading();
         if(odgovor.greska){
             alert(odgovor.podaci);
             return;
@@ -77,9 +85,11 @@ export default function NabavePromjena(){
     }
 
     async function dohvatiInicijalnePodatke(){
+        showLoading();
         await dohvatiDobavljace();
         await dohvatiNabava();
         await dohvatiArtikli();
+        hideLoading();
     }
 
     useEffect(()=>{
@@ -113,7 +123,7 @@ export default function NabavePromjena(){
         const podaci = new FormData(e.target);
 
         dodajArtikl({
-            sifraArtikla: podaci.get('uvjet'),
+            sifraArtikla: podaci.get('sifraArtikla'),
             kolicinaArtikla: podaci.get('kolicinaArtikla'),
             cijena: parseFloat(podaci.get('cijena')),
         });
@@ -187,7 +197,6 @@ export default function NabavePromjena(){
                         </span>
                         </>
                     )}
-                    
                     />
                 </Form.Group>
                 <hr />
@@ -197,7 +206,7 @@ export default function NabavePromjena(){
                     required defaultValue={nabava.kolicinaArtikla}/>
                 </Form.Group>
                 <hr />
-                <Form.Group controlId="kolocinaArtikla">
+                <Form.Group controlId="cijena">
                     <Form.Label>Cijena</Form.Label>
                     <Form.Control type="number" name="cijena" step={0.01}
                     required defaultValue={nabava.cijena}/>

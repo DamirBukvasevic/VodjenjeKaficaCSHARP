@@ -7,22 +7,31 @@ import { RoutesNames } from "../../constants";
 import moment from "moment";
 import Service from "../../services/NabavaService";
 
+import useLoading from "../../hooks/useLoading";
+
+
 export default function NabavePregled(){
 
     const [nabave,setNabave] = useState();
     
     let navigate = useNavigate();
 
+    const { showLoading, hideLoading } = useLoading();
+
     async function dohvatiNabave(){
+        showLoading();
         await Service.get()
         .then((odgovor)=>{
             setNabave(odgovor);
         })
         .catch((e)=>{console.log(e)});
+        hideLoading();
     }
 
     async function obrisiNabavu(sifra) {
+        showLoading();
         const odgovor = await Service.obrisi(sifra);
+        hideLoading();
         if(odgovor.greska){
             alert(odgovor.poruka);
             return;
