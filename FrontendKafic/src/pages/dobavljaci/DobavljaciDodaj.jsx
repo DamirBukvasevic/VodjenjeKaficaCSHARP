@@ -59,7 +59,7 @@ export default function DobavljaciDodaj(){
             <hr />
                 <Form.Group controlId="oib">
                     <Form.Label>OIB</Form.Label>
-                    <Form.Control type="text" pattern="^\d{11}$" name="oib" required title="OIB mora sadržavati 11 znamenaka!" />
+                    <Form.Control type="text" name="oib" required />
                 </Form.Group>
             <hr />
                 <Row>

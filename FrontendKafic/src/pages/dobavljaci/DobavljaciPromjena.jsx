@@ -77,7 +77,7 @@ export default function DobavljaciPromjena(){
                 <hr />
                 <Form.Group controlId="oib">
                     <Form.Label>OIB</Form.Label>
-                    <Form.Control type="text" pattern="^\d{11}$" name="oib" required title="OIB mora sadržavati 11 znamenaka!" defaultValue={dobavljac.oib} />
+                    <Form.Control type="text" name="oib" required defaultValue={dobavljac.oib} />
                 </Form.Group>
                 <hr />
                 <Row>
