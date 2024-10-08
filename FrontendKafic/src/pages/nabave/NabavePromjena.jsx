@@ -19,8 +19,9 @@ export default function NabavePromjena(){
 
     const [dobavljaci, setDobavljaci] = useState([]);
     const [dobavljacSifra, setDobavljacSifra] = useState(0);
-    const [artikli, setArtikli] = useState([]);
+    const [stavke, setStavke] = useState([]);
     const [pronadeniArtikli, setPronadeniArtikli] = useState([]);
+    const [odabraniArtikl,setOdabraniArtikl] = useState({});
 
     const [nabava, setNabava] = useState({});
 
@@ -49,7 +50,7 @@ export default function NabavePromjena(){
             alert(odgovor.poruka);
             return;
         }
-        setArtikli(odgovor.poruka);
+        setStavke(odgovor.poruka);
     }
 
     async function traziArtikl(uvjet) {
@@ -61,9 +62,9 @@ export default function NabavePromjena(){
         setPronadeniArtikli(odgovor.poruka);
     }
 
-    async function dodajArtikl(e) {
+    async function dodajStavku(stavka) {
         showLoading();
-        const odgovor = await Service.dodajArtikl(routeParams.sifra, e[0].sifra);
+        const odgovor = await Service.dodajStavku(stavka);
         if(odgovor.greska){
             alert(odgovor.poruka);
             return;
@@ -73,9 +74,9 @@ export default function NabavePromjena(){
         hideLoading();
     }
 
-    async function obrisiArtikl(artikl) {
+    async function obrisiStavku(stavka) {
         showLoading();
-        const odgovor = await Service.obrisiArtikl(routeParams.sifra, artikl);
+        const odgovor = await Service.obrisiStavku(stavka);
         hideLoading();
         if(odgovor.greska){
             alert(odgovor.podaci);
@@ -121,13 +122,17 @@ export default function NabavePromjena(){
         e.preventDefault();
 
         const podaci = new FormData(e.target);
-
-        dodajArtikl({
-            sifraArtikla: podaci.get('sifraArtikla'),
+        console.log(odabraniArtikl);
+        dodajStavku({
+            sifraNabave: routeParams.sifra,
+            sifraArtikla: odabraniArtikl.sifra,
             kolicinaArtikla: podaci.get('kolicinaArtikla'),
             cijena: parseFloat(podaci.get('cijena')),
         });
     }
+
+
+   
 
     return(
         <>
@@ -197,6 +202,8 @@ export default function NabavePromjena(){
                         </span>
                         </>
                     )}
+                    onChange={(e)=>setOdabraniArtikl(e[0])}
+                    ref={typeaheadRef}
                     />
                 </Form.Group>
                 <hr />
@@ -237,7 +244,7 @@ export default function NabavePromjena(){
                         </tr>
                     </thead>
                     <tbody className="stavka">
-                        {artikli && artikli.map((artikl, index) => (
+                        {stavke && stavke.map((artikl, index) => (
                             <tr key={index}>
                                 <td>
                                     {artikl.artiklaNaziv}
@@ -252,7 +259,7 @@ export default function NabavePromjena(){
                                 </td>
                                 <td>
                                     <Button className="siroko" variant="danger" onClick={() =>
-                                        obrisiArtikl(artikl)
+                                        obrisiStavku(artikl.sifra)
                                     }>
                                         Obriši
                                     </Button>

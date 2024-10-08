@@ -2,6 +2,6 @@
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <ActiveDebugProfile>https</ActiveDebugProfile>
-    <NameOfLastUsedPublishProfile>C:\Dokumenti\GitHub\VodjenjeKaficaCSHARP\VodjenjeKaficaCSHARP\Properties\PublishProfiles\damirbukva-001-site1 - Web Deploy.pubxml</NameOfLastUsedPublishProfile>
+    <NameOfLastUsedPublishProfile>C:\Users\Admin\Documents\Github\VodjenjeKaficaCSHARP\VodjenjeKaficaCSHARP\Properties\PublishProfiles\damirbukva-001-site1 - Web Deploy.pubxml</NameOfLastUsedPublishProfile>
   </PropertyGroup>
 </Project>
