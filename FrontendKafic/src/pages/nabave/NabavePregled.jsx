@@ -57,7 +57,7 @@ export default function NabavePregled(){
             <Link className="nabavaDodaj" to={RoutesNames.NABAVA_NOVI}>Unos nove nabave +</Link>
             </div>
             <div className="PregledDiv">
-            <Table striped bordered hover responsive>
+            <Table className="table2" striped bordered hover responsive>
                 <thead className="naslovAPP">
                     <tr>
                         <th>Broj nabave</th>
@@ -76,7 +76,7 @@ export default function NabavePregled(){
                                 <Button
                                 variant="primary"
                                 onClick={()=>{navigate(`/nabave/${entitet.sifra}`)}}>
-                                    Promjeni
+                                    Promjeni / Unos stavki 
                                 </Button>
                                 &nbsp;&nbsp;&nbsp;
                                 <Button

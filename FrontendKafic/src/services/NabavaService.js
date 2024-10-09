@@ -37,13 +37,14 @@ async function dodaj(nabava) {
     .catch((e)=>{
         switch (e.status) 
         {
-            case 400:
+            case 400:{
                 let poruke='';
                 for(const kljuc in e.response.data.errors)
                 {
                     poruke += kljuc + ': ' + e.response.data.errors[kljuc][0] + '\n';
                 }
                 return {greska: true, poruka: poruke}
+                }
             default:
                 return {greska: true, poruka: 'Nabava se ne može dodati!'}
         }
@@ -57,12 +58,13 @@ async function promjena(sifra,nabava) {
     })
     .catch((e)=>{
         switch (e.status) {
-            case 400:
+            case 400:{
                 let poruke='';
                 for(const kljuc in e.response.data.errors){
                     poruke += kljuc + ': ' + e.response.data.errors[kljuc][0] + '\n';
                 }
                 return {greska: true, poruka: poruke}
+                }
             default:
                 return {greska: true, poruka: 'Nabava se ne može promjeniti!'}
         }

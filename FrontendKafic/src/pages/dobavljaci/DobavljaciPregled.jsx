@@ -50,7 +50,7 @@ export default function DobavljaciPregled(){
             <Link className="dobavljacDodaj" to={RoutesNames.DOBAVLJAC_NOVI}>Unos novog dobavljaca +</Link>
             </div>
             <div className="PregledDiv">
-            <Table striped bordered hover responsive>
+            <Table className="table2" striped bordered hover responsive>
                 <thead className="naslovAPP">
                     <tr>
                         <th>Naziv dobavljača</th>

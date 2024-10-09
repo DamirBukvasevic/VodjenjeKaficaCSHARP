@@ -27,6 +27,8 @@ export default function NabavePromjena(){
 
     const typeaheadRef = useRef(null);
 
+    const [ukupno, setUkupno] = useState(0);
+
     async function dohvatiDobavljace(){
         const odgovor = await DobavljacService.get();
         setDobavljaci(odgovor);
@@ -97,6 +99,11 @@ export default function NabavePromjena(){
         dohvatiInicijalnePodatke();
     },[]);
 
+    useEffect(() => {
+        const novaUkupna = stavke.reduce((acc, artikl) => acc + (artikl.kolicinaArtikla * artikl.cijena), 0);
+        setUkupno(novaUkupna);
+    }, [stavke]);
+
     async function promjena(e){
         const odgovor = await Service.promjena(routeParams.sifra,e);
         if(odgovor.greska){
@@ -130,9 +137,6 @@ export default function NabavePromjena(){
             cijena: parseFloat(podaci.get('cijena')),
         });
     }
-
-
-   
 
     return(
         <>
@@ -184,7 +188,7 @@ export default function NabavePromjena(){
                 <hr />
                 <Form onSubmit={obradiSubmit2}>
                 <Form.Group controlId="uvjet">
-                    <Form.Label>Traži artikl</Form.Label>
+                    <Form.Label>Pretraga artikala</Form.Label>
                     <AsyncTypeahead
                     className='autocomplete'
                     id='uvjet'
@@ -210,13 +214,13 @@ export default function NabavePromjena(){
                 <Form.Group controlId="kolocinaArtikla">
                     <Form.Label>Količina artikla</Form.Label>
                     <Form.Control type="number" name="kolicinaArtikla" min={1} max={1000}
-                    required defaultValue={nabava.kolicinaArtikla}/>
+                    required defaultValue={nabava.kolicinaArtikla} placeholder='Min 1 , Max 1000'/>
                 </Form.Group>
                 <hr />
                 <Form.Group controlId="cijena">
-                    <Form.Label>Cijena</Form.Label>
+                    <Form.Label>Cijena artikla po kom</Form.Label>
                     <Form.Control type="number" name="cijena" step={0.01}
-                    required defaultValue={nabava.cijena}/>
+                    required defaultValue={nabava.cijena} placeholder='0.00'/>
                 </Form.Group>
                 <hr />
                 <Row>
@@ -233,13 +237,15 @@ export default function NabavePromjena(){
                     </Col>
                 </Row>
                 </Form>
-                <hr />
-                <Table striped bordered hover>
+            </div>
+            <div className="Col-12-stavke">
+                <Table className="table2" striped bordered hover>
                     <thead className="stavka">
                         <tr>
                             <th>Artikli u nabavi</th>
                             <th>Količina</th>
-                            <th>Cijena</th>
+                            <th>Cijena kom</th>
+                            <th>Ukupno</th>
                             <th>Akcija</th>
                         </tr>
                     </thead>
@@ -258,6 +264,9 @@ export default function NabavePromjena(){
                                     &nbsp;&nbsp;&nbsp;€
                                 </td>
                                 <td>
+                                    {(artikl.kolicinaArtikla * artikl.cijena).toFixed(2)} &nbsp;&nbsp;&nbsp;€
+                                </td>
+                                <td>
                                     <Button className="siroko" variant="danger" onClick={() =>
                                         obrisiStavku(artikl.sifra)
                                     }>
@@ -268,6 +277,7 @@ export default function NabavePromjena(){
                         ))}
                     </tbody>
                 </Table>
+                <h4 className="ukupno">Total: {ukupno.toFixed(2)} €</h4>
             </div>
         </>
     );

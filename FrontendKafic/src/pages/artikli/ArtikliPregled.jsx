@@ -50,7 +50,7 @@ export default function ArtikliPregled(){
             <Link className="artiklDodaj" to={RoutesNames.ARTIKL_NOVI} >Unos novog artikla  +</Link>
             </div>
             <div className="PregledDiv">
-            <Table striped bordered hover responsive>
+            <Table className="table2" striped bordered hover responsive>
                 <thead className="naslovAPP">
                     <tr>
                         <th>Naziv Artikla</th>

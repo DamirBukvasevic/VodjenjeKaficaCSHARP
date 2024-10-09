@@ -111,11 +111,29 @@ body{
     float: left;
     width: 50%;
     padding: 20px;
-    max-height: 800px;
+    max-height: 450px;
+    overflow: auto;
+}
+.Col-12-stavke{
+    float: left;
+    width: 100%;
+    max-height: 415px;
+    padding-left: 20px;
     overflow: auto;
 }
 .stavka{
     text-align: center;
+}
+.table2{
+    padding: 0;
+    margin: 0;
+}
+.ukupno{
+    text-align: right;
+    padding-right: 10px;
+    border: solid 1px;
+    margin-bottom: 0.3%;
+    background-color: #fff;
 }
 .loading-spinner-overlay {
     position: absolute;
