@@ -26,6 +26,8 @@ export default function NabavePromjena(){
     const [nabava, setNabava] = useState({});
 
     const typeaheadRef = useRef(null);
+    const cijenaRef = useRef(null);
+    const kolicinaRef = useRef(null);
 
     const [ukupno, setUkupno] = useState(0);
 
@@ -136,6 +138,10 @@ export default function NabavePromjena(){
             kolicinaArtikla: podaci.get('kolicinaArtikla'),
             cijena: parseFloat(podaci.get('cijena')),
         });
+
+        kolicinaRef.current.value='';
+        cijenaRef.current.value='';
+        povratakRef.current.value='';
     }
 
     return(
@@ -207,19 +213,25 @@ export default function NabavePromjena(){
                         </>
                     )}
                     onChange={(e)=>setOdabraniArtikl(e[0])}
+                    onKeyDown={(e) => {
+                        if (e.key === 'Enter') {
+                            e.preventDefault();
+                            kolicinaRef.current.focus();
+                        }
+                    }}
                     ref={typeaheadRef}
                     />
                 </Form.Group>
                 <hr />
                 <Form.Group controlId="kolocinaArtikla">
                     <Form.Label>Količina artikla</Form.Label>
-                    <Form.Control type="number" name="kolicinaArtikla" min={1} max={1000}
+                    <Form.Control type="number" name="kolicinaArtikla" min={1} max={1000} ref={kolicinaRef}
                     required defaultValue={nabava.kolicinaArtikla} placeholder='Min 1 , Max 1000'/>
                 </Form.Group>
                 <hr />
                 <Form.Group controlId="cijena">
                     <Form.Label>Cijena artikla po kom</Form.Label>
-                    <Form.Control type="number" name="cijena" step={0.01}
+                    <Form.Control type="number" name="cijena" step={0.01} ref={cijenaRef}
                     required defaultValue={nabava.cijena} placeholder='0.00'/>
                 </Form.Group>
                 <hr />
