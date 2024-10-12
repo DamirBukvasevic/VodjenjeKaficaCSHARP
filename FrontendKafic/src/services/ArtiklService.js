@@ -80,6 +80,12 @@ async function traziArtikl(uvjet){
     .catch((e)=>{return {greska: true, poruka: 'Problem kod traženja artikla'}})
 }
 
+async function getStranicenje(stranica,uvjet){
+    return await HttpService.get('/Artikl/traziStranicenje/'+stranica + '?uvjet=' + uvjet)
+    .then((odgovor)=>{return  {greska: false, poruka: odgovor.data};})
+    .catch((e)=>{ return {greska: true, poruka: 'Problem kod traženja artikla'}});
+  }
+
 export default{
     get,
     getBySifra,
@@ -87,5 +93,6 @@ export default{
     dodaj,
     promjena,
 
-    traziArtikl
+    traziArtikl,
+    getStranicenje
 }

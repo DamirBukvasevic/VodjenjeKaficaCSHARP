@@ -49,9 +49,9 @@ function App() {
           <Route path={RoutesNames.NABAVA_NOVI} element={<NabaveDodaj />} />
           <Route path={RoutesNames.NABAVA_PROMJENA} element={<NabavePromjena />} />
         </Routes>
-      </Container>
-      <Container className='footer'>
+        <div className='footer'>
           <h2>Kafic APP v.1.0.1   &copy; All rights reserved {godina()}</h2>
+        </div>
       </Container>
     </>
   )

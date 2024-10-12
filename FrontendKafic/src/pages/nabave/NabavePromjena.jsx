@@ -31,6 +31,10 @@ export default function NabavePromjena(){
 
     const [ukupno, setUkupno] = useState(0);
 
+    function idiNaUnosArtikla() {
+        navigate(RoutesNames.ARTIKL_NOVI);
+    }
+
     async function dohvatiDobavljace(){
         const odgovor = await DobavljacService.get();
         setDobavljaci(odgovor);
@@ -63,7 +67,14 @@ export default function NabavePromjena(){
             alert(odgovor.poruka);
             return;
         }
-        setPronadeniArtikli(odgovor.poruka);
+        if (odgovor.poruka.length === 0) {
+            const potvrda = window.confirm("Artikl ne postoji. Želite li dodati novi artikl?");
+            if (potvrda) {
+                idiNaUnosArtikla();
+            }
+        } else {
+            setPronadeniArtikli(odgovor.poruka);
+        }
     }
 
     async function dodajStavku(stavka) {
@@ -141,7 +152,9 @@ export default function NabavePromjena(){
 
         kolicinaRef.current.value='';
         cijenaRef.current.value='';
-        povratakRef.current.value='';
+
+        typeaheadRef.current.clear();
+        typeaheadRef.current.focus();
     }
 
     return(
