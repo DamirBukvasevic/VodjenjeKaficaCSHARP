@@ -297,7 +297,7 @@ namespace VodjenjeKaficaCSHARP.Controllers
                 var niz = uvjet.Split(" ");
                 foreach (var s in uvjet.Split(" "))
                 {
-                    query = query.Where(n => n.BrojNabave.ToString().Contains(s));
+                    query = query.Where(n => n.BrojNabave.ToString().Contains(s) || n.Dobavljac.Naziv.ToString().Contains(s));
                 }
                 var nabave = query.ToList();
                 return Ok(_mapper.Map<List<NabavaDTORead>>(nabave));

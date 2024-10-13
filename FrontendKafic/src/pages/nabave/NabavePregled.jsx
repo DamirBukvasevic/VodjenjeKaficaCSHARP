@@ -58,7 +58,7 @@ export default function NabavePregled(){
             console.log('Enter')
             setStranica(1);
             setUvjet(e.nativeEvent.srcElement.value);
-            setArtikli([]);
+            setNabave([]);
         }
     }
 
@@ -121,10 +121,10 @@ export default function NabavePregled(){
                 </thead>
                 <tbody className="bodyAPP">
                     {Array.isArray(nabave) && nabave.map((n)=>(
-                        <tr key={n.sifra}>
+                        <tr key={n.sifraNabave}>
                             <td>{n.brojNabave}</td>
                             <td>{formatirajDatum(n.datumNabave)}</td>
-                            <td>{n.dobavljacNaziv}</td>
+                            <td>{n.DobavljacNaziv}</td>
                             <td>
                                 <Button
                                 variant="primary"

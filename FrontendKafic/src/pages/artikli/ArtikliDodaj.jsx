@@ -36,7 +36,7 @@ export default function ArtikliDodaj(){
     return(
         <>
             <hr />
-                Unos novog artikla
+                Unos novog Artikla
             <hr />
             <Form onSubmit={obradiSubmit}>
                 <Form.Group controlId="naziv">
