@@ -100,6 +100,20 @@ async function obrisiStavku(sifra) {
     })
 }
 
+async function traziNabavu(uvjet){
+    return await HttpService.get('/Nabava/trazi/'+uvjet)
+    .then((odgovor)=>{
+        return {greska: false, poruka: odgovor.data}
+    })
+    .catch((e)=>{return {greska: true, poruka: 'Problem kod traženje nabave'}})
+}
+
+async function getStranicenje(stranica,uvjet){
+    return await HttpService.get('/Nabava/traziStranicenje/'+stranica + '?uvjet=' + uvjet)
+    .then((odgovor)=>{return  {greska: false, poruka: odgovor.data};})
+    .catch((e)=>{ return {greska: true, poruka: 'Problem kod traženje nabave'}});
+  }
+
 export default{
     get,
     getBySifra,
@@ -109,5 +123,8 @@ export default{
 
     getArtikli,
     dodajStavku,
-    obrisiStavku
+    obrisiStavku,
+
+    traziNabavu,
+    getStranicenje
 }

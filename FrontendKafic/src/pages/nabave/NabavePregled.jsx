@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useState } from "react";
-import { Button, Table } from "react-bootstrap";
+import { Button, Form, Pagination, Table } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { RoutesNames } from "../../constants";
@@ -8,11 +8,14 @@ import moment from "moment";
 import Service from "../../services/NabavaService";
 
 import useLoading from "../../hooks/useLoading";
+import NabavaService from "../../services/NabavaService";
 
 
 export default function NabavePregled(){
 
     const [nabave,setNabave] = useState();
+    const [stranica, setStranica] = useState(1);
+    const [uvjet, setUvjet] = useState('');
     
     let navigate = useNavigate();
 
@@ -20,13 +23,24 @@ export default function NabavePregled(){
 
     async function dohvatiNabave(){
         showLoading();
-        await Service.get()
-        .then((odgovor)=>{
-            setNabave(odgovor);
-        })
-        .catch((e)=>{console.log(e)});
+        const odgovor = await NabavaService.getStranicenje(stranica,uvjet);
+        hideLoading();
+        if(odgovor.greska){
+            alert(odgovor.poruka);
+            
+            return;
+        }
+        if(odgovor.poruka.length==0){
+            setStranica(stranica-1);
+            return;
+        }
+        setNabave(odgovor.poruka);
         hideLoading();
     }
+
+    useEffect(()=>{
+        dohvatiNabave();
+    },[stranica, uvjet]);
 
     async function obrisiNabavu(sifra) {
         showLoading();
@@ -39,9 +53,25 @@ export default function NabavePregled(){
         dohvatiNabave();
     }
 
-    useEffect(()=>{
-        dohvatiNabave();
-    },[]);
+    function promjeniUvjet(e) {
+        if(e.nativeEvent.key == "Enter"){
+            console.log('Enter')
+            setStranica(1);
+            setUvjet(e.nativeEvent.srcElement.value);
+            setArtikli([]);
+        }
+    }
+
+    function povecajStranicu() {
+        setStranica(stranica + 1);
+      }
+    
+      function smanjiStranicu() {
+        if(stranica==1){
+            return;
+        }
+        setStranica(stranica - 1);
+      }
 
     function formatirajDatum(datum){
         if(datum==null){
@@ -53,8 +83,31 @@ export default function NabavePregled(){
 
     return (
         <>
+            <div className="UnosDivTrazilica">
+                <Form.Control
+                type='text'
+                name='trazilica'
+                placeholder='Broj nabave [Enter]'
+                maxLength={255}
+                defaultValue=''
+                onKeyUp={promjeniUvjet}
+                />
+            </div>
             <div className="UnosDiv">
-            <Link className="nabavaDodaj" to={RoutesNames.NABAVA_NOVI}>Unos nove nabave +</Link>
+                {nabave && nabave.length > 0 && (
+                    <div style={{ display: "flex", justifyContent: "center" }}>
+                        <Pagination size="md">
+                        <Pagination.Prev onClick={smanjiStranicu} />
+                        <Pagination.Item disabled>{stranica}</Pagination.Item> 
+                        <Pagination.Next
+                            onClick={povecajStranicu}
+                        />
+                    </Pagination>
+                    </div>
+                )}
+            </div>
+            <div className="UnosDivUnosNabave">
+                <Link className="nabavaDodaj" to={RoutesNames.NABAVA_NOVI}>Unos nove nabave +</Link>
             </div>
             <div className="PregledDiv">
             <Table className="table2" striped bordered hover responsive>
@@ -67,21 +120,21 @@ export default function NabavePregled(){
                     </tr>
                 </thead>
                 <tbody className="bodyAPP">
-                    {nabave && nabave.map((entitet,index)=>(
-                        <tr key={index}>
-                            <td>{entitet.brojNabave}</td>
-                            <td>{formatirajDatum(entitet.datumNabave)}</td>
-                            <td>{entitet.dobavljacNaziv}</td>
+                    {Array.isArray(nabave) && nabave.map((n)=>(
+                        <tr key={n.sifra}>
+                            <td>{n.brojNabave}</td>
+                            <td>{formatirajDatum(n.datumNabave)}</td>
+                            <td>{n.dobavljacNaziv}</td>
                             <td>
                                 <Button
                                 variant="primary"
-                                onClick={()=>{navigate(`/nabave/${entitet.sifra}`)}}>
+                                onClick={()=>{navigate(`/nabave/${n.sifra}`)}}>
                                     Promjeni / Unos stavki 
                                 </Button>
                                 &nbsp;&nbsp;&nbsp;
                                 <Button
                                 variant="danger"
-                                onClick={()=>obrisiNabavu(entitet.sifra)}>
+                                onClick={()=>obrisiNabavu(n.sifra)}>
                                     Obriši
                                 </Button>
                             </td>

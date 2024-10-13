@@ -281,5 +281,56 @@ namespace VodjenjeKaficaCSHARP.Controllers
                 return BadRequest(new { poruka = ex.Message });
             }
         }
+
+        [HttpGet]
+        [Route("trazi/{uvjet}")]
+        public ActionResult<List<NabavaDTORead>> TraziNabavu(string uvjet)
+        {
+            if (uvjet == null || uvjet.Length < 3)
+            {
+                return BadRequest(ModelState);
+            }
+            uvjet = uvjet.ToLower();
+            try
+            {
+                IEnumerable<Nabava> query = _context.Nabave;
+                var niz = uvjet.Split(" ");
+                foreach (var s in uvjet.Split(" "))
+                {
+                    query = query.Where(n => n.BrojNabave.ToString().Contains(s));
+                }
+                var nabave = query.ToList();
+                return Ok(_mapper.Map<List<NabavaDTORead>>(nabave));
+            }
+            catch (Exception e)
+            {
+                return BadRequest(new { poruka = e.Message });
+            }
+        }
+
+        [HttpGet]
+        [Route("traziStranicenje/{stranica}")]
+        public IActionResult TraziNabavuStranicenje(int stranica, string uvjet = "")
+        {
+            var poStranici = 14;
+            uvjet = uvjet.ToLower();
+            try
+            {
+                var nabave = _context.Nabave
+                    .Where(n => EF.Functions.Like(n.BrojNabave.ToString(), "%" + uvjet + "%"))
+                    .Skip((poStranici * stranica) - poStranici)
+                    .Take(poStranici)
+                    .OrderBy(n => n.BrojNabave)
+                    .ToList();
+
+
+                return Ok(_mapper.Map<List<NabavaDTORead>>(nabave));
+
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
     }
 }
