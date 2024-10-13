@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using VodjenjeKaficaCSHARP.Data;
 using VodjenjeKaficaCSHARP.Models;
 using VodjenjeKaficaCSHARP.Models.DTO;
@@ -141,6 +142,57 @@ namespace VodjenjeKaficaCSHARP.Controllers
             catch (Exception ex)
             {
                 return BadRequest(new { poruka = ex.Message });
+            }
+        }
+
+        [HttpGet]
+        [Route("trazi/{uvjet}")]
+        public ActionResult<List<DobavljacDTORead>> TraziDobavljaca(string uvjet)
+        {
+            if (uvjet == null || uvjet.Length < 3)
+            {
+                return BadRequest(ModelState);
+            }
+            uvjet = uvjet.ToLower();
+            try
+            {
+                IEnumerable<Dobavljac> query = _context.Dobavljaci;
+                var niz = uvjet.Split(" ");
+                foreach (var s in uvjet.Split(" "))
+                {
+                    query = query.Where(d => d.Naziv.ToLower().Contains(s));
+                }
+                var dobavljaci = query.ToList();
+                return Ok(_mapper.Map<List<DobavljacDTORead>>(dobavljaci));
+            }
+            catch (Exception e)
+            {
+                return BadRequest(new { poruka = e.Message });
+            }
+        }
+
+        [HttpGet]
+        [Route("traziStranicenje/{stranica}")]
+        public IActionResult TraziDobavljacStranicenje(int stranica, string uvjet = "")
+        {
+            var poStranici = 14;
+            uvjet = uvjet.ToLower();
+            try
+            {
+                var dobavljaci = _context.Dobavljaci
+                    .Where(d => EF.Functions.Like(d.Naziv.ToLower(), "%" + uvjet + "%"))
+                    .Skip((poStranici * stranica) - poStranici)
+                    .Take(poStranici)
+                    .OrderBy(d => d.Naziv)
+                    .ToList();
+
+
+                return Ok(_mapper.Map<List<DobavljacDTORead>>(dobavljaci));
+
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
             }
         }
     }

@@ -71,10 +71,27 @@ async function promjena(sifra,dobavljac) {
     })
 }
 
+async function traziDobavljaca(uvjet){
+    return await HttpService.get('/Dobavljac/trazi/'+uvjet)
+    .then((odgovor)=>{
+        return {greska: false, poruka: odgovor.data}
+    })
+    .catch((e)=>{return {greska: true, poruka: 'Problem kod traženja dobavljača'}})
+}
+
+async function getStranicenje(stranica,uvjet){
+    return await HttpService.get('/Dobavljac/traziStranicenje/'+stranica + '?uvjet=' + uvjet)
+    .then((odgovor)=>{return  {greska: false, poruka: odgovor.data};})
+    .catch((e)=>{ return {greska: true, poruka: 'Problem kod traženja artikla'}});
+  }
+
 export default{
     get,
     getBySifra,
     obrisi,
     dodaj,
-    promjena
+    promjena,
+
+    traziDobavljaca,
+    getStranicenje
 }
