@@ -79,7 +79,7 @@ export default function DobavljaciPregled(){
                 <Form.Control
                 type='text'
                 name='trazilica'
-                placeholder='Dio naziva dobavljaca [Enter]'
+                placeholder='Dio naziva, grada, adresa ili oib [Enter]'
                 maxLength={255}
                 defaultValue=''
                 onKeyUp={promjeniUvjet}

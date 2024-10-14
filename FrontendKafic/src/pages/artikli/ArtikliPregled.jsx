@@ -78,7 +78,7 @@ export default function ArtikliPregled(){
                 <Form.Control
                 type='text'
                 name='trazilica'
-                placeholder='Dio naziva artikla [Enter]'
+                placeholder='Dio naziva [Enter]'
                 maxLength={255}
                 defaultValue=''
                 onKeyUp={promjeniUvjet}

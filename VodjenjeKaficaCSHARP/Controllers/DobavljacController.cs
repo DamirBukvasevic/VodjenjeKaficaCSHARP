@@ -160,7 +160,10 @@ namespace VodjenjeKaficaCSHARP.Controllers
                 var niz = uvjet.Split(" ");
                 foreach (var s in uvjet.Split(" "))
                 {
-                    query = query.Where(d => d.Naziv.ToLower().Contains(s));
+                    query = query.Where(d => d.Naziv.ToLower().Contains(s)
+                                        || d.Oib.ToLower().Contains(s)
+                                        || d.Grad.ToLower().Contains(s)
+                                        || d.Adresa.ToLower().Contains(s));
                 }
                 var dobavljaci = query.ToList();
                 return Ok(_mapper.Map<List<DobavljacDTORead>>(dobavljaci));
@@ -180,7 +183,10 @@ namespace VodjenjeKaficaCSHARP.Controllers
             try
             {
                 var dobavljaci = _context.Dobavljaci
-                    .Where(d => EF.Functions.Like(d.Naziv.ToLower(), "%" + uvjet + "%"))
+                    .Where(d => EF.Functions.Like(d.Naziv.ToLower(), "%" + uvjet + "%")
+                                || EF.Functions.Like(d.Oib.ToLower(), "%" + uvjet + "%")
+                                || EF.Functions.Like(d.Grad.ToLower(), "%" + uvjet + "%")
+                                || EF.Functions.Like(d.Adresa.ToLower(), "%" + uvjet + "%"))
                     .Skip((poStranici * stranica) - poStranici)
                     .Take(poStranici)
                     .OrderBy(d => d.Naziv)

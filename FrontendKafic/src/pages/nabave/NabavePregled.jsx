@@ -87,7 +87,7 @@ export default function NabavePregled(){
                 <Form.Control
                 type='text'
                 name='trazilica'
-                placeholder='Broj nabave [Enter]'
+                placeholder='Dio broj nabave, datum ili naziv [Enter]'
                 maxLength={255}
                 defaultValue=''
                 onKeyUp={promjeniUvjet}
@@ -124,7 +124,7 @@ export default function NabavePregled(){
                         <tr key={n.sifraNabave}>
                             <td>{n.brojNabave}</td>
                             <td>{formatirajDatum(n.datumNabave)}</td>
-                            <td>{n.DobavljacNaziv}</td>
+                            <td>{n.dobavljacNaziv}</td>
                             <td>
                                 <Button
                                 variant="primary"

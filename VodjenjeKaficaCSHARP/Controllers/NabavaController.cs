@@ -286,18 +286,21 @@ namespace VodjenjeKaficaCSHARP.Controllers
         [Route("trazi/{uvjet}")]
         public ActionResult<List<NabavaDTORead>> TraziNabavu(string uvjet)
         {
-            if (uvjet == null || uvjet.Length < 3)
+            if (uvjet == null || uvjet.Length < 1)
             {
                 return BadRequest(ModelState);
             }
             uvjet = uvjet.ToLower();
+            uvjet = uvjet.ToString();
             try
             {
                 IEnumerable<Nabava> query = _context.Nabave;
                 var niz = uvjet.Split(" ");
                 foreach (var s in uvjet.Split(" "))
                 {
-                    query = query.Where(n => n.BrojNabave.ToString().Contains(s) || n.Dobavljac.Naziv.ToString().Contains(s));
+                    query = query.Where(n => n.BrojNabave.ToString().Contains(s) 
+                                        || n.Dobavljac.Naziv.ToLower().Contains(s)
+                                        || n.DatumNabave.ToString().Contains(s));
                 }
                 var nabave = query.ToList();
                 return Ok(_mapper.Map<List<NabavaDTORead>>(nabave));
@@ -314,10 +317,14 @@ namespace VodjenjeKaficaCSHARP.Controllers
         {
             var poStranici = 14;
             uvjet = uvjet.ToLower();
+            uvjet = uvjet.ToString();
             try
             {
                 var nabave = _context.Nabave
-                    .Where(n => EF.Functions.Like(n.BrojNabave.ToString(), "%" + uvjet + "%"))
+                    .Include(n => n.Dobavljac)
+                    .Where(n => EF.Functions.Like(n.BrojNabave.ToString(), "%" + uvjet + "%")
+                            || EF.Functions.Like(n.Dobavljac.Naziv.ToLower(), "%" + uvjet + "%")
+                            || EF.Functions.Like(n.DatumNabave.ToString(), "%" + uvjet + "%"))
                     .Skip((poStranici * stranica) - poStranici)
                     .Take(poStranici)
                     .OrderBy(n => n.BrojNabave)
