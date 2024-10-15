@@ -16,9 +16,16 @@ import NabaveDodaj from './pages/nabave/NabaveDodaj'
 import NabavePromjena from './pages/nabave/NabavePromjena'
 
 import LoadingSpinner from './components/LoadingSpinner'
+import ErrorModal from './components/ErrorModal';
+import useError from "./hooks/useError"
+import Login from "./pages/Login"
+import useAuth from "./hooks/useAuth"
 
 
 function App() {
+
+  const { errors, prikaziErrorModal, sakrijError } = useError();
+  const { isLoggedIn } = useAuth();
 
   function godina(){
     const pocenta = 2024;
@@ -32,10 +39,13 @@ function App() {
   return (
     <>
       <LoadingSpinner />
+      <ErrorModal show={prikaziErrorModal} errors={errors} onHide={sakrijError} />
       <Container className='visina'>
         <NavBarKafic />
         <Routes>
           <Route path={RoutesNames.HOME} element={<Pocetna />} />
+          {isLoggedIn ? (
+          <>
 
           <Route path={RoutesNames.ARTIKL_PREGLED} element={<ArtikliPregled />} />
           <Route path={RoutesNames.ARTIKL_NOVI} element={<ArtikliDodaj />} />
@@ -48,6 +58,12 @@ function App() {
           <Route path={RoutesNames.NABAVA_PREGLED} element={<NabavePregled />} />
           <Route path={RoutesNames.NABAVA_NOVI} element={<NabaveDodaj />} />
           <Route path={RoutesNames.NABAVA_PROMJENA} element={<NabavePromjena />} />
+          </>
+          ) : (
+          <>
+            <Route path={RoutesNames.LOGIN} element={<Login />} />
+          </>
+          )}
         </Routes>
         <div className='footer'>
           <h2>Kafic APP v.1.0.1   &copy; All rights reserved {godina()}</h2>

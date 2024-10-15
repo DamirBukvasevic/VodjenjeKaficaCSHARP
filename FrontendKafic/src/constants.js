@@ -12,6 +12,10 @@ export const RoutesNames = {
     NABAVA_PREGLED: '/nabave',
     NABAVA_NOVI: '/nabave/dodaj',
     NABAVA_PROMJENA: '/nabave/:sifra',
+
+    LOGIN: '/login'
 };
 
-export const BACKEND_URL = 'https://damirbukva-001-site1.gtempurl.com/api/v1';
+export const APP_URL = 'https://damirbukva-001-site1.gtempurl.com';
+
+export const BACKEND_URL = APP_URL + '/api/v1';

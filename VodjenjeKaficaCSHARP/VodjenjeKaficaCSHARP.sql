@@ -15,6 +15,17 @@ drop table Stavke;
 drop table Nabave;
 drop table Artikli;
 drop table Dobavljaci;
+drop table Operateri;
+
+create table Operateri(
+sifra int not null primary key identity(1,1),
+email varchar(50) not null,
+lozinka varchar(200) not null
+);
+
+-- Lozinka edunova generirana pomoæu https://bcrypt-generator.com/
+insert into operateri values ('damirbukvasevic@gmail.com',
+'$2a$12$rzrFIvpYGB2ac3TWf99nEuHJ1gMHihwzwWSFM1fW3HN9hqn7Jyhym');
 
 create table Dobavljaci(
 Sifra int not null primary key identity(1,1),
