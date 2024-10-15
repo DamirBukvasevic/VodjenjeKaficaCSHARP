@@ -12,6 +12,7 @@ namespace VodjenjeKaficaCSHARP.Data
         public DbSet<Dobavljac> Dobavljaci {get; set; }
         public DbSet<Nabava> Nabave { get; set; }
         public DbSet<Stavka> Stavke { get; set; }
+        public DbSet<Operater> Operateri { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

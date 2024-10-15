@@ -1,6 +1,7 @@
 using VodjenjeKaficaCSHARP.Data;
 using Microsoft.EntityFrameworkCore;
 using VodjenjeKaficaCSHARP.Mapping;
+using VodjenjeKaficaCSHARP.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +11,7 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddVodjenjeKaficaCORS();
 
 //dodavanje baze podataka
 builder.Services.AddDbContext<VodjenjeKaficaContext>(
@@ -30,6 +32,11 @@ builder.Services.AddCors(opcije =>
 //automapper
 builder.Services.AddAutoMapper(typeof(VodjenjeKaficaMappingProfile));
 
+// SECURITY
+builder.Services.AddVodjenjeKaficaSecurity();
+builder.Services.AddAuthorization();
+// END SECURITY
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -44,6 +51,11 @@ var app = builder.Build();
 //}
 
 app.UseHttpsRedirection();
+
+// SECURITY
+app.UseAuthentication();
+app.UseAuthorization();
+// ENDSECURITY
 
 app.UseAuthorization();
 

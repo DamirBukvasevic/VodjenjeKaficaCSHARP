@@ -1,20 +1,15 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using VodjenjeKaficaCSHARP.Data;
 
 namespace VodjenjeKaficaCSHARP.Controllers
 {
-    public abstract class VodjenjeKaficaController:ControllerBase
+    [Authorize]
+    public abstract class VodjenjeKaficaController(VodjenjeKaficaContext context, IMapper mapper) :ControllerBase
     {
-        protected readonly VodjenjeKaficaContext _context;
+        protected readonly VodjenjeKaficaContext _context = context;
 
-        protected readonly IMapper _mapper;
-
-
-        public VodjenjeKaficaController(VodjenjeKaficaContext context, IMapper mapper)
-        {
-            _context = context;
-            _mapper = mapper;
-        }
+        protected readonly IMapper _mapper = mapper;
     }
 }
