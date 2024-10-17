@@ -53,30 +53,32 @@ export default function ArtikliPromjena(){
 
     return(
         <>
-            <hr />
-                Promjena artikla
-            <hr />
-            <Form onSubmit={obradiSubmit}>
-                <Form.Group controlId="naziv">
-                    <Form.Label>Naziv</Form.Label>
-                    <Form.Control type="text" name="naziv" required defaultValue={artikl.nazivArtikla} />
-                </Form.Group>
+            <div className='backgroundDiv'>
                 <hr />
-                <Row>
-                    <Col xs={6} sm={6} md={3} lg={6} xl={6} xxl={6}>
-                    <Link to={RoutesNames.ARTIKL_PREGLED}
-                    className="btn btn-danger siroko">
-                    Odustani
-                    </Link>
-                    </Col>
-                    <Col xs={6} sm={6} md={9} lg={6} xl={6} xxl={6}>
-                    <Button variant="primary" type="submit" className="siroko">
-                        Promjeni artikl
-                    </Button>
-                    </Col>
-                </Row>
-            </Form>
-            <hr />
+                    Promjena artikla
+                <hr />
+                <Form onSubmit={obradiSubmit}>
+                    <Form.Group controlId="naziv">
+                        <Form.Label>Naziv</Form.Label>
+                        <Form.Control type="text" name="naziv" required defaultValue={artikl.nazivArtikla} />
+                    </Form.Group>
+                    <hr />
+                    <Row>
+                        <Col xs={6} sm={6} md={3} lg={6} xl={6} xxl={6}>
+                        <Link to={RoutesNames.ARTIKL_PREGLED}
+                        className="btn btn-danger sirokoOdustani">
+                        Odustani
+                        </Link>
+                        </Col>
+                        <Col xs={6} sm={6} md={9} lg={6} xl={6} xxl={6}>
+                        <Button variant="primary" type="submit" className="sirokoPromjeniDodaj">
+                            Promjeni artikl
+                        </Button>
+                        </Col>
+                    </Row>
+                </Form>
+                <hr />
+            </div>
         </>
     )
 }

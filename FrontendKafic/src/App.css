@@ -4,75 +4,237 @@
 .sredina{
     text-align: center;
 }
-.siroko{
+.sirokoPromjeniDodaj:hover{
+    border-color: #36465c;
+    background-color: #3c83d3;
+    color: #010408;
+}
+.sirokoPromjeniDodaj{
     width: 100%;
+    height: 40px;
+    border: solid 3px;
+    border-radius: 3px;
+    border-color: #36465c;
+    background-color: rgb(39, 90, 160);
+}
+.sirokoOdustani:hover{
+    border-color: #36465c;
+    background-color: #3c83d3;
+    color: #010408;
+}
+.sirokoOdustani{
+    width: 100%;
+    height: 40px;
+    border: solid 3px;
+    border-radius: 3px;
+    border-color: #36465c;
+    background-color: rgb(114, 124, 138);
+    color: #fff;
+}
+.sirokoObrisi:hover{
+    border-color: #36465c;
+    background-color: #3c83d3;
+    color: #010408;
+}
+.sirokoObrisi{
+    width: 100%;
+    height: 40px;
+    border: solid 3px;
+    border-radius: 3px;
+    border-color: #36465c;
+    background-color: rgb(114, 124, 138);
+    color: #fff;
 }
 .visina{
     padding: 0;
     min-height: 922px;
+    color: #fff;
+}
+body{
+    background-color: #3f4044;
+    min-height: 100vh;
+}
+.mt-4{
+    width: 50%;
+}
+.loginDiv{
+    width: 100%;
+    height: 855px;
+    padding: 152px 152px 240px 152px;
+    background-color: #72a2e4;
+    border: solid 1px;
+}
+.loginDiv h1, p{
+    text-align: center;
+}
+.loginDiv2{
+    padding: 20px;
+    border: solid 3px;
+    border-radius: 3px;
+    border-color: #d2d8e0;
+    margin-left: 15%;
+    margin-right: 15%;
+}
+.gumbLogIn{
+    border: solid 3px;
+    border-radius: 3px;
+    border-color: #36465c;
+    width: 100%;
+    height: 38px;
+    padding: 0;
+    background-color: rgb(39, 90, 160);
+    color: #fff;
+}
+.gumbLogIn:hover{
+    border-color: #36465c;
+    background-color: #3c83d3;
+    color: #fff;
+}
+.backgroundDiv{
+    float: left;
+    width: 100%;
+    height: 860px;
+    background-color: #72a2e4;
+    border: solid 1px;
+    border-radius: 3px;
+    border-color: white;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+.navbar{
+    background-color: rgb(123, 128, 136)!important;
 }
 #navbarSticky{
     width: 100%;
     height: auto;
-    margin-bottom: 2px;
+    margin-bottom: 0px;
     border: solid 1px;
 }
 .nav-link{
-    width: 150px!important;
-    border: solid 1px;
-    border-radius: 5px;
+    width: 200px!important;
+    border: solid 3px;
+    border-radius: 3px;
+    border-color: #36465c;
     margin-left: 0.5%;
     margin-right: 0.5%;
     text-align: center;
-}
-.nav-link:hover{
-    background-color: #0b5ed7;
-    border-color: #0b5ed7;
+    background-color: rgb(39, 90, 160);
     color: #fff;
 }
+.nav-link:hover{
+    background-color: #3c83d3;
+    border-color: #2e394b;
+    color: black;
+}
 .nav-link:focus{
-    background-color: #0b5ed7;
-    border-color: #010408;
-    color: #44cf1a;
+    background-color: rgb(187, 208, 238);
+    border-color: #36465c;
+    color: #010408;
 }
 .swagger{
     color: #4a4f53!important;
 }
 .swagger:hover{
     background-color: #0b5ed7;
-    border-color: #0b5ed7;
+    border-color: #36465c;
     color: #fff!important;
+}
+.gumbPromjeniArtikl:hover, .gumbPromjeniDobavljac:hover, .gumbPromjeniNabaveUnos:hover{
+    border-color: #36465c;
+    background-color: #3c83d3;
+    color: #010408;
+}
+.gumbPromjeniArtikl{
+    border: solid 3px;
+    border-radius: 3px;
+    border-color: #36465c;
+    width: 15%;
+    height: 38px;
+    padding: 0;
+    background-color: rgb(39, 90, 160);
+    color: #fff;
+}
+.gumbPromjeniDobavljac{
+    border: solid 3px;
+    border-radius: 3px;
+    border-color: #36465c;
+    width: 25%;
+    height: 38px;
+    padding: 0;
+    background-color: rgb(39, 90, 160);
+    color: #fff;
+}
+.gumbPromjeniNabaveUnos{
+    border: solid 3px;
+    border-radius: 3px;
+    border-color: #36465c;
+    width: 35%;
+    height: 38px;
+    padding: 0;
+    background-color: rgb(39, 90, 160);
+    color: #fff;
+}
+.gumbObrisiArtikl:hover, .gumbObrisiDobavljac:hover, .gumbObrisiNabave:hover{
+    border-color: #36465c;
+    background-color: #3c83d3;
+    color: #010408;
+}
+.gumbObrisiArtikl{
+    border: solid 3px;
+    border-radius: 3px;
+    border-color: #36465c;
+    width: 15%;
+    height: 38px;
+    padding: 0;
+    background-color: rgb(114, 124, 138);
+    color: #fff;
+}
+.gumbObrisiDobavljac{
+    border: solid 3px;
+    border-radius: 3px;
+    border-color: #36465c;
+    width: 25%;
+    height: 38px;
+    padding: 0;
+    background-color: rgb(114, 124, 138);
+    color: #fff;
+}
+.gumbObrisiNabave{
+    border: solid 3px;
+    border-radius: 3px;
+    border-color: #36465c;
+    width: 25%;
+    height: 38px;
+    padding: 0;
+    background-color: rgb(114, 124, 138);
+    color: #fff;
 }
 .artiklDodaj, .dobavljacDodaj, .nabavaDodaj, .stavkaDodaj{
     text-decoration: none;
     font-size: 15px;
-    color: #4a4f53;
+    color: #fff;
     display: inline-block;
     padding: 5px;
     text-align: center;
-    border: solid 1px;
-    border-color: black;
-    border-radius: 5px;
+    border: solid 3px;
+    border-radius: 3px;
+    border-color: #36465c;
     top: 67px;
-    background-color: #fff;
+    background-color: rgb(39, 90, 160);
 }
 .artiklDodaj, .dobavljacDodaj, .nabavaDodaj{
     width: 100%;
 }
 .artiklDodaj:hover, .dobavljacDodaj:hover, .nabavaDodaj:hover, .stavkaDodaj:hover{
-    background-color: #0b5ed7;
-    border-color: #0b5ed7;
-    color: #fff;
+    border-color: #36465c;
+    background-color: #3c83d3;
+    color: #010408;
 }
 .table-responsive{
     max-height: 813px!important;
 }
 .tablicaArtikli{
     width: 50%!important;
-}
-body{
-    background-color: #d9d9e6;
-    min-height: 100vh;
 }
 .naslovAPP{
     border: solid 1px;
@@ -88,19 +250,20 @@ body{
 .UnosDiv{
     float: left;
     width: 33.3%;
-    margin-top: 0%;
+    margin-top: 5px;
     height: 39px;
 }
 .UnosDivTrazilica{
     float: left;
     width: 33.3%;
-    margin-top: 0%;
+    margin-top: 4px;
+    margin-bottom: 4px;
     height: 39px;
 }
 .UnosDivUnosArtikla, .UnosDivUnosDobavljaca, .UnosDivUnosNabave{
     float: left;
     width: 33.3%;
-    margin-top: 0%;
+    margin-top: 5px;
     height: 39px;
 }
 .PregledDiv{
@@ -114,16 +277,16 @@ body{
     float: left;
     width: 100%;
     height: 30px;
-    background-color: white;
-    position: -webkit-sticky;
-    position: sticky;
     border: solid 1px;
     bottom: 0;
+    background-color: rgb(123, 128, 136)!important;
 }
 .footer h2{
     padding-top: 5px;
+    padding-bottom: 5px;
     text-align: center;
     font-size: 15px;
+    color: black;
 }
 .Col-6-lijevo{
     float: left;
@@ -131,6 +294,7 @@ body{
     padding: 19px;
     max-height: 450px;
     overflow: auto;
+    color: #fff;
 }
 .Col-12-stavke{
     float: left;
@@ -140,6 +304,7 @@ body{
 }
 .stavka{
     text-align: center;
+    background-color: #3c83d3;
 }
 .table2{
     padding: 0;
@@ -147,10 +312,11 @@ body{
 }
 .ukupno{
     text-align: right;
-    padding-right: 10px;
+    padding-right: 25px;
     border: solid 1px;
-    margin-bottom: 0.3%;
-    background-color: #fff;
+    background-color: #3c83d3;
+    color: #010408;
+    margin: 0;
 }
 .loading-spinner-overlay {
     position: absolute;

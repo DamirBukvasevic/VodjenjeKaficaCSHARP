@@ -83,11 +83,12 @@ export default function NabavePregled(){
 
     return (
         <>
+        <div className='backgroundDiv'>
             <div className="UnosDivTrazilica">
                 <Form.Control
                 type='text'
                 name='trazilica'
-                placeholder='Dio broj nabave, datum ili naziv [Enter]'
+                placeholder='Unesite broj nabave, datum ili naziv dobavljača [Enter]'
                 maxLength={255}
                 defaultValue=''
                 onKeyUp={promjeniUvjet}
@@ -127,13 +128,13 @@ export default function NabavePregled(){
                             <td>{n.dobavljacNaziv}</td>
                             <td>
                                 <Button
-                                variant="primary"
+                                variant="primary" className="gumbPromjeniNabaveUnos"
                                 onClick={()=>{navigate(`/nabave/${n.sifra}`)}}>
                                     Promjeni / Unos stavki 
                                 </Button>
                                 &nbsp;&nbsp;&nbsp;
                                 <Button
-                                variant="danger"
+                                variant="danger" className="gumbObrisiNabave"
                                 onClick={()=>obrisiNabavu(n.sifra)}>
                                     Obriši
                                 </Button>
@@ -143,6 +144,7 @@ export default function NabavePregled(){
                 </tbody>
             </Table>
             </div>
+        </div>
         </>
 
     );

@@ -74,11 +74,12 @@ export default function ArtikliPregled(){
 
     return(
         <>
+        <div className='backgroundDiv'>
             <div className="UnosDivTrazilica">
                 <Form.Control
                 type='text'
                 name='trazilica'
-                placeholder='Dio naziva [Enter]'
+                placeholder='Unesite naziv artikla [Enter]'
                 maxLength={255}
                 defaultValue=''
                 onKeyUp={promjeniUvjet}
@@ -113,11 +114,11 @@ export default function ArtikliPregled(){
                         <tr key={a.sifra}>
                             <td>{a.nazivArtikla}</td>
                             <td>
-                                <Button variant="primary" onClick={() => navigate(`/artikli/${a.sifra}`)}>
+                                <Button variant="primary" className='gumbPromjeniArtikl' onClick={() => navigate(`/artikli/${a.sifra}`)}>
                                     Promjeni
                                 </Button>
                                 &nbsp;&nbsp;&nbsp;
-                                <Button variant="danger" onClick={() => obrisi(a.sifra)}>
+                                <Button variant="danger" className='gumbObrisiArtikl' onClick={() => obrisi(a.sifra)}>
                                     Obriši
                                 </Button>
                             </td>
@@ -126,6 +127,7 @@ export default function ArtikliPregled(){
                 </tbody>
             </Table>
             </div>
+        </div>
         </>
     )
 }

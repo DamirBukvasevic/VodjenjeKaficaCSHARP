@@ -159,6 +159,7 @@ export default function NabavePromjena(){
 
     return(
         <>
+        <div className='backgroundDiv'>
             <div className="Col-6-lijevo">
                 Promjena podataka nabave
                 <hr />
@@ -190,12 +191,12 @@ export default function NabavePromjena(){
                     <Row>
                         <Col xs={6} sm={6} md={3} lg={6} xl={6} xxl={6}>
                         <Link to={RoutesNames.NABAVA_PREGLED}
-                            className="btn btn-danger siroko">
+                            className="btn btn-danger sirokoOdustani">
                             Odustani
                         </Link>
                         </Col>
                         <Col xs={6} sm={6} md={9} lg={6} xl={6} xxl={6}>
-                        <Button variant="primary" type="submit" className="siroko">
+                        <Button variant="primary" type="submit" className="sirokoPromjeniDodaj">
                             Promjeni podatke nabave
                         </Button>
                         </Col>
@@ -251,12 +252,12 @@ export default function NabavePromjena(){
                 <Row>
                     <Col xs={6} sm={6} md={3} lg={6} xl={6} xxl={6}>
                     <Link to={RoutesNames.NABAVA_PREGLED}
-                        className="btn btn-danger siroko">
+                        className="btn btn-danger sirokoOdustani">
                         Odustani
                     </Link>
                     </Col>
                     <Col xs={6} sm={6} md={9} lg={6} xl={6} xxl={6}>
-                    <Button variant="primary" type="submit" className="siroko">
+                    <Button variant="primary" type="submit" className="sirokoPromjeniDodaj">
                         Dodaj stavku nabave
                     </Button>
                     </Col>
@@ -292,7 +293,7 @@ export default function NabavePromjena(){
                                     {(artikl.kolicinaArtikla * artikl.cijena).toFixed(2)} &nbsp;&nbsp;&nbsp;€
                                 </td>
                                 <td>
-                                    <Button className="siroko" variant="danger" onClick={() =>
+                                    <Button className="sirokoObrisi" variant="danger" onClick={() =>
                                         obrisiStavku(artikl.sifra)
                                     }>
                                         Obriši
@@ -304,6 +305,7 @@ export default function NabavePromjena(){
                 </Table>
                 <h4 className="ukupno">Total: {ukupno.toFixed(2)} €</h4>
             </div>
+        </div>
         </>
     );
 }

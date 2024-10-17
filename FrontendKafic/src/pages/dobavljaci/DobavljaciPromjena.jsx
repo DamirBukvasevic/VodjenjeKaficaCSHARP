@@ -56,6 +56,7 @@ export default function DobavljaciPromjena(){
 
     return(
         <>
+        <div className='backgroundDiv'>
             <hr />
                 Promjena podataka dobavljača
             <hr />
@@ -83,18 +84,19 @@ export default function DobavljaciPromjena(){
                 <Row>
                     <Col xs={6} sm={6} md={3} lg={6} xl={6} xxl={6}>
                     <Link to={RoutesNames.DOBAVLJAC_PREGLED}
-                        className="btn btn-danger siroko">
+                        className="btn btn-danger sirokoOdustani">
                         Odustani
                     </Link>
                     </Col>
                     <Col xs={6} sm={6} md={9} lg={6} xl={6} xxl={6}>
-                    <Button variant="primary" type="submit" className="siroko">
-                        Promjeni podatke dobavljaca
+                    <Button variant="primary" type="submit" className="sirokoPromjeniDodaj">
+                        Promjeni podatke dobavljača
                     </Button>
                     </Col>
                 </Row>
             </Form>
             <hr />
+        </div>
         </>
     )
 }

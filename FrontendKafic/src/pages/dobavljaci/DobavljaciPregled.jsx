@@ -75,11 +75,13 @@ export default function DobavljaciPregled(){
 
     return(
         <>
+        <div className='backgroundDiv'>
             <div className="UnosDivTrazilica">
                 <Form.Control
                 type='text'
                 name='trazilica'
-                placeholder='Dio naziva, grada, adresa ili oib [Enter]'
+                className="trazilica"
+                placeholder='Unesite naziv dobavljača, grada, adrese ili oib [Enter]'
                 maxLength={255}
                 defaultValue=''
                 onKeyUp={promjeniUvjet}
@@ -99,7 +101,7 @@ export default function DobavljaciPregled(){
                 )}
             </div>
             <div className="UnosDivUnosDobavljaca">
-                <Link className="dobavljacDodaj" to={RoutesNames.DOBAVLJAC_NOVI}>Unos novog dobavljaca +</Link>
+                <Link className="dobavljacDodaj" to={RoutesNames.DOBAVLJAC_NOVI}>Unos novog dobavljača +</Link>
             </div>
             <div className="PregledDiv">
             <Table className="table2" striped bordered hover responsive>
@@ -121,13 +123,13 @@ export default function DobavljaciPregled(){
                             <td>{d.oib}</td>
                             <td>
                                 <Button
-                                variant="primary"
+                                variant="primary" className='gumbPromjeniDobavljac'
                                 onClick={()=>navigate(`/dobavljaci/${d.sifra}`)}>
                                     Promjeni
                                 </Button>
                                 &nbsp;&nbsp;&nbsp;
                                 <Button
-                                variant="danger"
+                                variant="danger" className='gumbObrisiDobavljac'
                                 onClick={()=>obrisi(d.sifra)}>
                                     Obriši
                                 </Button>
@@ -137,6 +139,7 @@ export default function DobavljaciPregled(){
                 </tbody>
             </Table>
             </div>
+        </div>
         </>
     )
 }

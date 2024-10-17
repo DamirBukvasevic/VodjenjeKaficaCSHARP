@@ -38,6 +38,7 @@ export default function DobavljaciDodaj(){
 
     return(
         <>
+        <div className='backgroundDiv'>
             <hr />
                 Unos novog Dobavljača
             <hr />
@@ -65,18 +66,19 @@ export default function DobavljaciDodaj(){
                 <Row>
                     <Col xs={6} sm={6} md={3} lg={6} xl={6} xxl={6}>
                     <Link to={RoutesNames.DOBAVLJAC_PREGLED}
-                        className="btn btn-danger siroko">
+                        className="btn btn-danger sirokoOdustani">
                         Odustani
                     </Link>
                     </Col>
                     <Col xs={6} sm={6} md={9} lg={6} xl={6} xxl={6}>
-                    <Button variant="primary" type="submit" className="siroko">
+                    <Button variant="primary" type="submit" className="sirokoPromjeniDodaj">
                         Dodaj novog dobavljača
                     </Button>
                     </Col>
                 </Row>
             </Form>
             <hr />
+        </div>
         </>
     )
 }
