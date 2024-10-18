@@ -8,11 +8,19 @@ using VodjenjeKaficaCSHARP.Models.DTO;
 
 namespace VodjenjeKaficaCSHARP.Controllers
 {
+    /// <summary>
+    /// Kontroler za upravljanje nabavama.
+    /// </summary>
+    /// <param name="context">Pristup podacima u bazi.</param>
+    /// <param name="mapper">Pristup Automaperu.</param>
     [ApiController]
     [Route("api/v1/[controller]")]
     public class NabavaController(VodjenjeKaficaContext context, IMapper mapper) : VodjenjeKaficaController(context, mapper)
     {
-
+        /// <summary>
+        /// Dohvaća sve nabave.
+        /// </summary>
+        /// <returns>Popis nabava</returns>
         [HttpGet]
         public ActionResult<List<NabavaDTORead>> Get()
         {
@@ -30,6 +38,11 @@ namespace VodjenjeKaficaCSHARP.Controllers
             }
         }
 
+        /// <summary>
+        /// Dohvaća nabavu prema šifri.
+        /// </summary>
+        /// <param name="sifra"></param>
+        /// <returns>Nabava</returns>
         [HttpGet]
         [Route("{sifra:int}")]
         public ActionResult<NabavaDTOInsertUpdate> GetBySifra(int sifra)
@@ -54,6 +67,11 @@ namespace VodjenjeKaficaCSHARP.Controllers
             return Ok(_mapper.Map<NabavaDTOInsertUpdate>(e));
         }
 
+        /// <summary>
+        /// Dodaje novu nabavu.
+        /// </summary>
+        /// <param name="dto">Podaci o nabavi</param>
+        /// <returns></returns>
         [HttpPost]
         public IActionResult Post(NabavaDTOInsertUpdate dto)
         {
@@ -89,6 +107,12 @@ namespace VodjenjeKaficaCSHARP.Controllers
             }
         }
 
+        /// <summary>
+        /// Ažurira nabavu prema šifri.
+        /// </summary>
+        /// <param name="sifra">Šifra nabave</param>
+        /// <param name="dto">Podaci o nabavi</param>
+        /// <returns></returns>
         [HttpPut]
         [Route("{sifra:int}")]
         [Produces("application/json")]
@@ -141,6 +165,11 @@ namespace VodjenjeKaficaCSHARP.Controllers
             }
         }
 
+        /// <summary>
+        /// Briše nabavu prema šifri.
+        /// </summary>
+        /// <param name="sifra">Šifra nabave</param>
+        /// <returns>Poruka o uspješnom brisanju</returns>
         [HttpDelete]
         [Route("{sifra:int}")]
         [Produces("application/json")]
@@ -175,6 +204,11 @@ namespace VodjenjeKaficaCSHARP.Controllers
             }
         }
 
+        /// <summary>
+        /// Dohvaća artikle prema šifri nabave.
+        /// </summary>
+        /// <param name="sifraNabave">Šifra nabave</param>
+        /// <returns>Popis artikala</returns>
         [HttpGet]
         [Route("Stavke/{sifraNabave:int}")]
         public ActionResult<List<StavkaDTORead>> getArtikli(int sifraNabave)
@@ -199,6 +233,12 @@ namespace VodjenjeKaficaCSHARP.Controllers
                 return BadRequest(new { poruka = ex.Message });
             }
         }
+
+        /// <summary>
+        /// Dodaje stavku u nabavu(ArtiklNaziv,količina,cijena).
+        /// </summary>
+        /// <param name="dto">Stavka u nabavi(ArtiklNaziv,količina,cijena)</param>
+        /// <returns>Poruka o uspješnom dodavanju stavke u nabavu</returns>
         [HttpPost]
         [Route("dodajStavku")]
         public IActionResult DodajStavku(StavkaDTOInsertUpdate dto)
@@ -245,6 +285,11 @@ namespace VodjenjeKaficaCSHARP.Controllers
             }
         }
 
+        /// <summary>
+        /// Briše stavku iz nabave.
+        /// </summary>
+        /// <param name="sifra">Šifra stavke u nabavi.</param>
+        /// <returns>HTTP status kod i poruka o uspješnom brisanju.</returns>
         [HttpDelete]
         [Route("obrisiStavka/{sifra:int}")]
         [Produces("application/json")]
@@ -282,6 +327,11 @@ namespace VodjenjeKaficaCSHARP.Controllers
             }
         }
 
+        /// <summary>
+        /// Dohvaća nabave prema uvjetu.
+        /// </summary>
+        /// <param name="uvjet">Uvjet pretrage.</param>
+        /// <returns>Popis nabava koji zadovoljavaju uvjet pretrage u obliku DTO objekata.</returns>
         [HttpGet]
         [Route("trazi/{uvjet}")]
         public ActionResult<List<NabavaDTORead>> TraziNabavu(string uvjet)
@@ -311,6 +361,12 @@ namespace VodjenjeKaficaCSHARP.Controllers
             }
         }
 
+        /// <summary>
+        /// Traži nabave s paginacijom.
+        /// </summary>
+        /// <param name="stranica">Broj stranice.</param>
+        /// <param name="uvjet">Uvjet pretrage.</param>
+        /// <returns>Popis nabava koji zadovoljavaju uvjet pretrage s paginacijom u obliku DTO objekata.</returns>
         [HttpGet]
         [Route("traziStranicenje/{stranica}")]
         public IActionResult TraziNabavuStranicenje(int stranica, string uvjet = "")

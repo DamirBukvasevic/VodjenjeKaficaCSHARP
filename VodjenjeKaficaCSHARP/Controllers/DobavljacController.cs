@@ -7,11 +7,20 @@ using VodjenjeKaficaCSHARP.Models.DTO;
 
 namespace VodjenjeKaficaCSHARP.Controllers
 {
+    /// <summary>
+    /// Kontroler za upravljanje dobavljačima
+    /// </summary>
+    /// <param name="context">Pristup podacima u bazi</param>
+    /// <param name="mapper">Pristup automaperu</param>
     [ApiController]
     [Route("Api/v1/[Controller]")]
     public class DobavljacController(VodjenjeKaficaContext context, IMapper mapper) : VodjenjeKaficaController(context, mapper)
     {
 
+        /// <summary>
+        /// Dohvaća sve dobavljače.
+        /// </summary>
+        /// <returns>Popis dobavljača u obliku DTO objekata</returns>
         [HttpGet]
         public ActionResult<List<DobavljacDTORead>> Get()
         {
@@ -29,6 +38,11 @@ namespace VodjenjeKaficaCSHARP.Controllers
             }
         }
 
+        /// <summary>
+        /// Dohvaća dobavljače prema šifri.
+        /// </summary>
+        /// <param name="Sifra">Šifra dobavljača.</param>
+        /// <returns>Dobavljač u obliku DTO objekta</returns>
         [HttpGet]
         [Route("{Sifra:int}")]
         public ActionResult<DobavljacDTORead> GetBySifra(int Sifra)
@@ -53,6 +67,11 @@ namespace VodjenjeKaficaCSHARP.Controllers
             return Ok(_mapper.Map<DobavljacDTORead>(e));
         }
 
+        /// <summary>
+        /// Dodaje novog dobavljača.
+        /// </summary>
+        /// <param name="dto">Podaci o dobavljaču za unos</param>
+        /// <returns>HTTP status kod i dodani dobavljač u obliku DTO objekta.</returns>
         [HttpPost]
         public IActionResult Post(DobavljacDTOInsertUpdate dto)
         {
@@ -73,6 +92,12 @@ namespace VodjenjeKaficaCSHARP.Controllers
             }
         }
 
+        /// <summary>
+        /// Ažurira dobavljača prema šifri.
+        /// </summary>
+        /// <param name="Sifra">Šifra dobavljača.</param>
+        /// <param name="dto">Podaci o dobavljaču za ažuriranje.</param>
+        /// <returns>HTTP status kod i poruka o uspješnom ažuriranju.</returns>
         [HttpPut]
         [Route("{Sifra:int}")]
         [Produces("application/json")]
@@ -111,6 +136,11 @@ namespace VodjenjeKaficaCSHARP.Controllers
             }
         }
 
+        /// <summary>
+        /// Briše dobavljača prema šifri.
+        /// </summary>
+        /// <param name="Sifra">Šifra dobavljača.</param>
+        /// <returns>HTTP status kod i poruka o uspješnom brisanju.</returns>
         [HttpDelete]
         [Route("{Sifra:int}")]
         [Produces("application/json")]
@@ -145,6 +175,11 @@ namespace VodjenjeKaficaCSHARP.Controllers
             }
         }
 
+        /// <summary>
+        /// Traži dobavljače prema uvjetu.
+        /// </summary>
+        /// <param name="uvjet">Uvjet pretrage.</param>
+        /// <returns>Popis dobavljača koji zadovoljavaju uvjet pretrage u obliku DTO objekata.</returns>
         [HttpGet]
         [Route("trazi/{uvjet}")]
         public ActionResult<List<DobavljacDTORead>> TraziDobavljaca(string uvjet)
@@ -174,6 +209,12 @@ namespace VodjenjeKaficaCSHARP.Controllers
             }
         }
 
+        /// <summary>
+        /// Traži dobavljače s paginacijom.
+        /// </summary>
+        /// <param name="stranica">Broj stranice</param>
+        /// <param name="uvjet">Uvjet pretrage</param>
+        /// <returns>Popis dobavljača koji zadovoljavaju uvjet pretrage s paginacijom u obliku DTO objekata.</returns>
         [HttpGet]
         [Route("traziStranicenje/{stranica}")]
         public IActionResult TraziDobavljacStranicenje(int stranica, string uvjet = "")

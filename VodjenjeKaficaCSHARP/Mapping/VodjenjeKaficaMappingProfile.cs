@@ -4,9 +4,14 @@ using VodjenjeKaficaCSHARP.Models.DTO;
 
 namespace VodjenjeKaficaCSHARP.Mapping
 {
+    /// <summary>
+    /// Klasa koja sadrži mapiranja između modela i DTO objekata.
+    /// </summary>
     public class VodjenjeKaficaMappingProfile:Profile
     {
-
+        /// <summary>
+        /// Konstruktor koji definira mapiranja između modela i DTO objekata.
+        /// </summary>
         public VodjenjeKaficaMappingProfile()
         {
             CreateMap<Artikl, ArtiklDTORead>();

@@ -6,9 +6,15 @@ using System.Text;
 
 namespace VodjenjeKaficaCSHARP.Extensions
 {
+    /// <summary>
+    /// Extension methods for configuring services in the Kafic application.
+    /// </summary>
     public static class VodjenjeKaficaExtensions
     {
-
+        /// <summary>
+        /// Adds Swagger generation with custom settings for the Kafic APP.
+        /// </summary>
+        /// <param name="Services">The service collection to add the Swagger generation to.</param>
         public static void AddVodjenjeKaficaCSHARPSwaggerGen(this IServiceCollection Services)
         {
             // prilagodba za dokumentaciju, čitati https://medium.com/geekculture/customizing-swagger-in-asp-net-core-5-2c98d03cbe52
@@ -75,6 +81,10 @@ namespace VodjenjeKaficaCSHARP.Extensions
 
         }
 
+        /// <summary>
+        /// Adds CORS policy to allow any origin, method, and header.
+        /// </summary>
+        /// <param name="Services">The service collection to add the CORS policy to.</param>
         public static void AddVodjenjeKaficaCORS(this IServiceCollection Services)
         {
             // Svi se od svuda na sve moguće načine mogu spojitina naš API
@@ -91,6 +101,10 @@ namespace VodjenjeKaficaCSHARP.Extensions
 
         }
 
+        /// <summary>
+        /// Adds JWT-based authentication to the service collection.
+        /// </summary>
+        /// <param name="Services">The service collection to add the authentication to.</param>
         public static void AddVodjenjeKaficaSecurity(this IServiceCollection Services)
         {
             // https://www.youtube.com/watch?v=mgeuh8k3I4g&ab_channel=NickChapsas

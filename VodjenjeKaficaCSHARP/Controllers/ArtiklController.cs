@@ -7,11 +7,20 @@ using VodjenjeKaficaCSHARP.Models.DTO;
 
 namespace VodjenjeKaficaCSHARP.Controllers
 {
+    /// <summary>
+    /// Kontroler za upravljanjem artiklima.
+    /// </summary>
+    /// <param name="context">Pristup podacima u bazi.</param>
+    /// <param name="mapper">Pristup Automaperu.</param>
     [ApiController]
     [Route("Api/v1/[Controller]")]
     public class ArtiklController(VodjenjeKaficaContext context, IMapper mapper) : VodjenjeKaficaController(context, mapper)
     {
-  
+        
+        /// <summary>
+        /// Dohvaća sve artikle.
+        /// </summary>
+        /// <returns>Popis artikala u obliku DTO objekata.</returns>
         [HttpGet]
         public ActionResult<List<ArtiklDTORead>> Get()
         {
@@ -29,6 +38,11 @@ namespace VodjenjeKaficaCSHARP.Controllers
             }
         }
 
+        /// <summary>
+        /// Dohvaća artikle prema šifri.
+        /// </summary>
+        /// <param name="Sifra">Šifra artikla.</param>
+        /// <returns>Artikl u obliku DTO objekta.</returns>
         [HttpGet]
         [Route("{Sifra:int}")]
         public ActionResult<ArtiklDTORead> GetBySifra(int Sifra)
@@ -54,6 +68,11 @@ namespace VodjenjeKaficaCSHARP.Controllers
 
         }
 
+        /// <summary>
+        /// Dodaje novi artikla.
+        /// </summary>
+        /// <param name="dto">Podaci o artiklu za unos</param>
+        /// <returns>HTTP status kod i dodani artikl u obliku DTO objekta.</returns>
         [HttpPost]
         public IActionResult Post(ArtiklDTOInsertUpdate dto)
         {
@@ -74,6 +93,12 @@ namespace VodjenjeKaficaCSHARP.Controllers
             }
         }
 
+        /// <summary>
+        /// Ažurira artikl prema šifri.
+        /// </summary>
+        /// <param name="Sifra">Šifra artikla.</param>
+        /// <param name="dto">Podaci o artiklu za ažuriranje.</param>
+        /// <returns>HTTP status kod i poruka o uspješnom ažuriranju.</returns>
         [HttpPut]
         [Route("{Sifra:int}")]
         [Produces("application/json")]
@@ -112,6 +137,11 @@ namespace VodjenjeKaficaCSHARP.Controllers
             }
         }
 
+        /// <summary>
+        /// Briše artikl prema šifri.
+        /// </summary>
+        /// <param name="Sifra">Šifra artikla.</param>
+        /// <returns>HTTP status kod i poruka o uspješnom brisanju.</returns>
         [HttpDelete]
         [Route("{Sifra:int}")]
         [Produces("application/json")]
@@ -146,6 +176,11 @@ namespace VodjenjeKaficaCSHARP.Controllers
             }
         }
 
+        /// <summary>
+        /// Traži artikle prema uvjetu.
+        /// </summary>
+        /// <param name="uvjet">Uvjet pretrage.</param>
+        /// <returns>Popis artikala koji zadovoljavaju uvjet pretrage u obliku DTO objekata.</returns>
         [HttpGet]
         [Route("trazi/{uvjet}")]
         public ActionResult<List<ArtiklDTORead>> TraziArtikl(string uvjet)
@@ -172,6 +207,12 @@ namespace VodjenjeKaficaCSHARP.Controllers
             }
         }
 
+        /// <summary>
+        /// Traži artikle s paginacijom.
+        /// </summary>
+        /// <param name="stranica">Broj stranice.</param>
+        /// <param name="uvjet">Uvjet pretrage.</param>
+        /// <returns>Popis artikala koji zadovoljavaju uvjet pretrage s paginacijom u obliku DTO objekata.</returns>
         [HttpGet]
         [Route("traziStranicenje/{stranica}")]
         public IActionResult TraziArtiklStranicenje(int stranica, string uvjet = "")
