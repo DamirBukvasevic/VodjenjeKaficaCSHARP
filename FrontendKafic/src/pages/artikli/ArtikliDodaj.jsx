@@ -5,7 +5,6 @@ import ArtiklService from "../../services/ArtiklService";
 
 import useLoading from "../../hooks/useLoading";
 
-
 export default function ArtikliDodaj(){
 
     const navigate = useNavigate();
