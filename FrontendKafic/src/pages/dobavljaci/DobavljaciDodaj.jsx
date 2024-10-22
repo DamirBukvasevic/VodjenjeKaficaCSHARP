@@ -5,6 +5,7 @@ import DobavljacServices from "../../services/DobavljacService";
 
 import useLoading from "../../hooks/useLoading";
 
+import pocetnaSlika from "../../assets/slike/banner-bg.png";
 
 export default function DobavljaciDodaj(){
 
@@ -39,6 +40,7 @@ export default function DobavljaciDodaj(){
     return(
         <>
         <div className='backgroundDiv'>
+        <img className="pocetnaSlika2" src={pocetnaSlika} alt="pocetna" />
             <hr />
                 Unos novog Dobavljača
             <hr />

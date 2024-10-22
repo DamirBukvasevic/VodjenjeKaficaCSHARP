@@ -8,6 +8,7 @@ import { Button, Col, Form, Row } from "react-bootstrap";
 
 import useLoading from "../../hooks/useLoading";
 
+import pocetnaSlika from "../../assets/slike/banner-bg.png";
 
 export default function NabaveDodaj(){
     const navigate =useNavigate();
@@ -54,6 +55,7 @@ export default function NabaveDodaj(){
     return (
         <>
         <div className='backgroundDiv'>
+        <img className="pocetnaSlika2" src={pocetnaSlika} alt="pocetna" />
             <hr />
                 Unos nove Nabave
             <hr />

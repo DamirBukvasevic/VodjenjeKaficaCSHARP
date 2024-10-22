@@ -5,6 +5,8 @@ import ArtiklService from "../../services/ArtiklService";
 
 import useLoading from "../../hooks/useLoading";
 
+import pocetnaSlika from "../../assets/slike/banner-bg.png";
+
 export default function ArtikliDodaj(){
 
     const navigate = useNavigate();
@@ -35,6 +37,7 @@ export default function ArtikliDodaj(){
     return(
         <>
         <div className='backgroundDiv'>
+            <img className="pocetnaSlika2" src={pocetnaSlika} alt="pocetna" />
             <hr />
                 Unos novog Artikla
             <hr />
