@@ -47,6 +47,7 @@ var app = builder.Build();
     {
         opcije.ConfigObject.AdditionalItems.Add("requestSnippetsEnabled", true);
         opcije.EnableTryItOutByDefault();
+        opcije.DocExpansion(Swashbuckle.AspNetCore.SwaggerUI.DocExpansion.None);
     });
 //}
 
