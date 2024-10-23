@@ -7,6 +7,7 @@ import moment from "moment";
 import { Button, Col, Form, Row, Table } from "react-bootstrap";
 import { AsyncTypeahead } from "react-bootstrap-typeahead";
 import ArtiklService from "../../services/ArtiklService";
+import { NumericFormat } from "react-number-format";
 
 import useLoading from "../../hooks/useLoading";
 
@@ -286,11 +287,32 @@ export default function NabavePromjena(){
                                     &nbsp;&nbsp;&nbsp;Kom
                                 </td>
                                 <td>
-                                    {artikl.cijena}
-                                    &nbsp;&nbsp;&nbsp;€
+                                    {artikl.cijena==null ?'nije definirano'
+                                    :
+                                    <NumericFormat 
+                                    value={artikl.cijena}
+                                    displayType={'text'}
+                                    thousandSeparator='.'
+                                    decimalSeparator=','
+                                    prefix={'€'}
+                                    decimalScale={2}
+                                    fixedDecimalScale
+                                    />
+                                    }
                                 </td>
                                 <td>
-                                    {(artikl.kolicinaArtikla * artikl.cijena).toFixed(2)} &nbsp;&nbsp;&nbsp;€
+                                    {(artikl.kolicinaArtikla * artikl.cijena).toFixed(2)==null ?'nije definirano'
+                                    :
+                                    <NumericFormat 
+                                    value={artikl.kolicinaArtikla * artikl.cijena}
+                                    displayType={'text'}
+                                    thousandSeparator='.'
+                                    decimalSeparator=','
+                                    prefix={'€'}
+                                    decimalScale={2}
+                                    fixedDecimalScale
+                                    />
+                                    }
                                 </td>
                                 <td>
                                     <Button className="sirokoObrisi" variant="danger" onClick={() =>
@@ -303,7 +325,19 @@ export default function NabavePromjena(){
                         ))}
                     </tbody>
                 </Table>
-                <h4 className="ukupno">Total: {ukupno.toFixed(2)} €</h4>
+                <h4 className="ukupno">
+                    Total: {ukupno.toFixed(2)==null ?'nije definirano'
+                    :
+                    <NumericFormat 
+                    value={ukupno}
+                    displayType={'text'}
+                    thousandSeparator='.'
+                    decimalSeparator=','
+                    prefix={'€'}
+                    decimalScale={2}
+                    fixedDecimalScale
+                    />
+                    }</h4>
             </div>
         </div>
         </>
